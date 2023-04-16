@@ -1,0 +1,73 @@
+﻿@model Product
+<div class="modal-body">
+	<div class="row pr-modal-items">
+		<div class="product-modal-carousel col-xs-12 col-sm-12  col-md-6 col-lg-6">
+			@if (Model.ProductImages != null && Model.ProductImages.Count() > 0)
+			{
+				@foreach (ProductImage productImage in Model.ProductImages)
+				{
+					<div class="pr-img"><img src="assets/img/Product/@productImage.Image"></div>
+				}
+			}
+
+		</div>
+		<div class="product-details col-xs-12 col-sm-12  col-md-6 col-lg-6">
+			<div class="product-name">
+				<h2><a href="">@Model.Title</a></h2>
+			</div>
+			<div class="product-reviews">
+				<span class="stars">
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+				</span>
+				<span class="total-reviews">
+					No Reviews
+				</span>
+				<a href="#" class="write-review">Write a Review</a>
+			</div>
+			<div class="modal-line">
+				<hr>
+			</div>
+			<div class="price-box">
+				@if (Model.DiscountedPrice > 0)
+				{
+					<span class="price-old">$@Model.DiscountedPrice</span>
+					<span class="price-regular"><del>$@Model.Price</del></span>
+				}
+			</div>
+			<div class="modal-line">
+				<hr>
+			</div>
+			<div class="product-add-qty">
+				<div class="product-qty">
+					<input type="number" value="1" min="0" max="10">
+				</div>
+				<div class="product-add-to-cart-btn">
+					<a href="#">Add To Cart</a>
+				</div>
+			</div>
+			<div class="modal-line">
+				<hr>
+			</div>
+			<div id="add-to-wishlist">
+				<i class="fa-regular fa-heart"></i>
+				<a href="#">ADD TO WISHLIST</a>
+			</div>
+			<div class="modal-line">
+				<hr>
+			</div>
+			<div class="follow-us-area">
+				<h5>Share:</h5>
+				<div class="social-icons">
+					<i class="fa-brands fa-facebook-f"></i>
+					<i class="fa-brands fa-twitter"></i>
+					<i class="fa-brands fa-whatsapp"></i>
+					<i class="fa-brands fa-telegram"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

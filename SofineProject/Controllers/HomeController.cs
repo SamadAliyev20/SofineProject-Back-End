@@ -19,6 +19,7 @@ namespace SofineProject.Controllers
             HomeVM homeVM = new HomeVM 
             { 
              Sliders=await _context.Sliders.Where(s=>s.IsDeleted==false).ToListAsync(),
+             Products=await _context.Products.Where(p=>p.IsDeleted==false).ToListAsync(),
             };
             return View(homeVM);
         }

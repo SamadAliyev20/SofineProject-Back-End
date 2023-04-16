@@ -1,967 +1,405 @@
 ﻿@model HomeVM
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
-    <!-- Start Header-Slider Section -->
-    <section id="header-slider">
-      <div class="hero-slider">
-        @foreach (Slider slider in Model.Sliders)
-        {
-            <div class="col-12 col-lg-12">
-                <div class="single-slider">
-                    <div class="slider-img-fluid">
-                        <img src="assets/img/Slider/@slider.Image" alt="">
-                    </div>
-                    <div class="slider-text col-7 col-lg-2 ">
-                        <span class="sub-title">
-                            <h4>@slider.SubTitle</h4>
-                        </span>
-                        <span class="main-title">
-                            <h1>@Html.Raw(slider.MainTitle)</h1>
-                        </span>
-                        <span class="desc">@slider.Description</span>
-                        <a href="#" class="btn btn-dark">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        }
-        
-      </div>
-    </section>
-    <!-- End Header-Slider Section -->
-    <!-- Start Banner Section-->
-    <section id="banner">
-      <div class="container">
-        <div class="row">
-          <div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
-            <div class="banner-single-item">
-              <div class="banner-img">
-                <img src="assets/img/Banner/banner-1.jpg">
-              </div>
-              <div class="banner-title">
-                <a href="#">Shop Men's</a>
-              </div>
-            </div>
-          </div>
-          <div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
-            <div class="banner-single-item">
-              <div class="banner-img">
-                <img src="assets/img/Banner/banner-2.jpg">
-              </div>
-              <div class="banner-title">
-                <a href="#">Shop Women's</a>
-              </div>
-            </div>
-          </div>
-          <div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
-            <div class="banner-single-item">
-              <div class="banner-img">
-                <img src="assets/img/Banner/banner-3.jpg">
-              </div>
-              <div class="banner-title">
-                <div class="banner-sub-title">
-                  <h1>
-                    Mid-Season Sale
-                    Get Up To 50% Off
-                  </h1>
-                  <div class="banner-desc">
-                    <p>Casual pieces for chilling at home.</p>
-                  </div>
-                </div>
-                <a href="#">Discover Now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Banner Section -->
-    <!-- Start hand-picked Section-->
-    <section id="hand-Pick" class="mb-5">
-      <div class="hand-pick-title text-center">
-        <h3 class="fw-bold">New in hand-picked daily</h3>
-        <p>Your favorites, in new prints and styles.</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="product-slider d-flex justify-content-between flex-wrap">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#" class="product-img">
-                    <img class="first-image" src="assets/img/Product/product-1.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-1-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-2.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-2-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-3.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-3-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-4.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-4-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-5.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-5-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-6.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-6-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-7.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-7-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-8.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-8-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End hand-picked Section-->
-    <!-- Start Category Section-->
-    <section id="Category-Section">
-      <div class="container">
-        <div class="category-all">
-          <div class="category-content-title">
-            <div class="wrap-title ">
-              <div class="category-title">
-                <h3>Top Categories on This Week</h3>
-              </div>
-              <div class="category-description">
-                Shop the world’s best destinations from home
-              </div>
-              <div class="category-link">
-                <a href="#">All Categories</a>
-              </div>
-            </div>
-          </div>
-          <div class="category-carousel">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-1.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-2.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-3.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-4.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-5.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="category-single-item">
-                <div class="category-img">
-                  <a href="">
-                    <img src="assets/img/Category/category-6.jpg" alt="">
-                  </a>
-                </div>
-                <div class="category-text">
-                  <a href="">
-                    <h3>Accessories</h3>
-                    <span class="category-count">22</span>
-                  </a>
-                </div>
-                <div class="category-arrow">
-                  <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Category Section-->
-    <!-- Start  Highlights Section-->
-    <section id="hand-Pick" class="mb-5">
-      <div class="hand-pick-title text-center">
-        <h3 class="fw-bold">This week’s highlights</h3>
-        <p>Your favorites, in new prints and styles.</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="product-slider d-flex justify-content-between flex-wrap">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#" class="product-img">
-                    <img class="first-image" src="assets/img/Product/product-1.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-1-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-2.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-2-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-3.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-3-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-4.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-4-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-5.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-5-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-6.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-6-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-7.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-7-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="product-single-item">
-                <div class="product-thumb mb-4">
-                  <a href="#">
-                    <img class="first-image" src="assets/img/Product/product-8.jpg" alt="">
-                    <img class="second-image" src="assets/img/Product/product-8-hover.jpg" alt="">
-                  </a>
-                </div>
-                <div class="product-content">
-                  <div class="product-name">
-                    <h2><a href="">Proenza Schouler White Label</a></h2>
-                  </div>
-                  <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                  </div>
-                  <div class="price-box">
-                    <span class="price-regular">$96.00</span>
-                    <span class="price-old"><del>$70.00</del></span>
-                  </div>
-                  <div class="product-overlay-top-left">
-                    <span class="sale-price">-30%</span>
-                  </div>
-                  <div class="heart-button">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                  </div>
-                  <div class="group-button">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#product-quick-view"><i
-                        class="fa-regular fa-eye"></i></a>
-                    <a href=""><i class="fa-solid fa-basket-shopping"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End  Highlights Section-->
-    <!-- Start  Brands Section-->
-    <section id="Brands-Section" class="mb-5">
-      <div class="container">
-        <div class="brand-carousel">
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-1.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-2.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-3.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-4.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-5.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <div class="single-brand-item">
-              <div class="brand-img">
-                <img src="assets/img/Brand/brand-6.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End  Brands Section-->
-    <!-- Start Product Modal Section-->
-    <section>
-    <div class="modal fade" id="product-quick-view" tabindex="-1" aria-labelledby="product-quickview" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row pr-modal-items">
-                        <div class="product-modal-carousel col-xs-12 col-sm-12  col-md-6 col-lg-6">
-                            <div class="pr-img"><img src="assets/img/Product/product-1.jpg"></div>
-                            <div class="pr-img"><img src="assets/img/Product/product-1-hover.jpg"></div>
-                            <div class="pr-img"><img src="assets/img/Product/product-2.jpg"></div>
-                            <div class="pr-img"><img src="assets/img/Product/product-2-hover.jpg"></div>
-                        </div>
-                        <div class="product-details col-xs-12 col-sm-12  col-md-6 col-lg-6">
-                            <div class="product-name">
-                                <h2><a href="">Proenza Schouler White Label</a></h2>
-                            </div>
-                            <div class="product-reviews">
-                                <span class="stars">
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
-                                <span class="total-reviews">
-                                    No Reviews
-                                </span>
-                                <a href="#" class="write-review">Write a Review</a>
-                            </div>
-                            <div class="modal-line">
-                                <hr>
-                            </div>
-                            <div class="price-box">
-                                <span class="price-regular">$150.00</span>
-                                <span class="price-old">$230.00</span>
-                            </div>
-                            <div class="modal-line">
-                                <hr>
-                            </div>
-                            <div class="product-add-qty">
-                                <div class="product-qty">
-                                    <input type="number" value="1" min="0" max="10">
-                                </div>
-                                <div class="product-add-to-cart-btn">
-                                    <a href="#">Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="modal-line">
-                                <hr>
-                            </div>
-                            <div id="add-to-wishlist">
-                                <i class="fa-regular fa-heart"></i>
-                                <a href="#">ADD TO WISHLIST</a>
-                            </div>
-                            <div class="modal-line">
-                                <hr>
-                            </div>
-                            <div class="follow-us-area">
-                                <h5>Share:</h5>
-                                <div class="social-icons">
-                                    <i class="fa-brands fa-facebook-f"></i>
-                                    <i class="fa-brands fa-twitter"></i>
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                    <i class="fa-brands fa-telegram"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    <!-- End Product Modal Section-->
+<!-- Start Header-Slider Section -->
+<section id="header-slider">
+	<div class="hero-slider">
+		@foreach (Slider slider in Model.Sliders)
+		{
+			<div class="col-12 col-lg-12">
+				<div class="single-slider">
+					<div class="slider-img-fluid">
+						<img src="assets/img/Slider/@slider.Image" alt="">
+					</div>
+					<div class="slider-text col-7 col-lg-2 ">
+						<span class="sub-title">
+							<h4>@slider.SubTitle</h4>
+						</span>
+						<span class="main-title">
+							<h1>@Html.Raw(slider.MainTitle)</h1>
+						</span>
+						<span class="desc">@slider.Description</span>
+						<a href="#" class="btn btn-dark">Shop Now</a>
+					</div>
+				</div>
+			</div>
+		}
 
+	</div>
+</section>
+<!-- End Header-Slider Section -->
+<!-- Start Banner Section-->
+<section id="banner">
+	<div class="container">
+		<div class="row">
+			<div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
+				<div class="banner-single-item">
+					<div class="banner-img">
+						<img src="assets/img/Banner/banner-1.jpg">
+					</div>
+					<div class="banner-title">
+						<a href="#">Shop Men's</a>
+					</div>
+				</div>
+			</div>
+			<div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
+				<div class="banner-single-item">
+					<div class="banner-img">
+						<img src="assets/img/Banner/banner-2.jpg">
+					</div>
+					<div class="banner-title">
+						<a href="#">Shop Women's</a>
+					</div>
+				</div>
+			</div>
+			<div class="laber-banner col-xs-12 col-lg-4 col-md-12 col-sm-12">
+				<div class="banner-single-item">
+					<div class="banner-img">
+						<img src="assets/img/Banner/banner-3.jpg">
+					</div>
+					<div class="banner-title">
+						<div class="banner-sub-title">
+							<h1>
+								Mid-Season Sale
+								Get Up To 50% Off
+							</h1>
+							<div class="banner-desc">
+								<p>Casual pieces for chilling at home.</p>
+							</div>
+						</div>
+						<a href="#">Discover Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Section -->
+<!-- Start hand-picked Section-->
+<section id="hand-Pick" class="mb-5">
+	<div class="hand-pick-title text-center">
+		<h3 class="fw-bold">This week’s highlights</h3>
+		<p>Your favorites, in new prints and styles.</p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="product-slider d-flex justify-content-between flex-wrap">
+				@foreach (Product product in Model.Products)
+				{
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="product-single-item">
+							<div class="product-thumb mb-4">
+								<a href="#" class="product-img">
+									<img class="first-image" src="assets/img/Product/@product.MainImage" alt="">
+									<img class="second-image" src="assets/img/Product/@product.HoverImage" alt="">
+								</a>
+							</div>
+							<div class="product-content">
+								<div class="product-name">
+									<h2><a href="">@product.Title</a></h2>
+								</div>
+								<div class="product-reviews">
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+								</div>
+								<div class="price-box">
+									@if (product.DiscountedPrice > 0)
+									{
+										<span class="price-regular">$@product.DiscountedPrice</span>
+										<span class="price-old"><del>$@product.Price</del></span>
+									}
+								</div>
+								<div class="product-overlay-top-left">
+									@if (product.DiscountedPrice > 0)
+									{
+										<span class="sale-price">@Math.Ceiling((((product.Price - product.DiscountedPrice) / product.Price) * 100))%</span>
+									}
+								</div>
+								<div class="heart-button">
+									<a href="#"><i class="fa-regular fa-heart"></i></a>
+								</div>
+								<div class="group-button">
+									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+									<a href=""><i class="fa-solid fa-basket-shopping"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End hand-picked Section-->
+<!-- Start Category Section-->
+<section id="Category-Section">
+	<div class="container">
+		<div class="category-all">
+			<div class="category-content-title">
+				<div class="wrap-title ">
+					<div class="category-title">
+						<h3>Top Categories on This Week</h3>
+					</div>
+					<div class="category-description">
+						Shop the world’s best destinations from home
+					</div>
+					<div class="category-link">
+						<a href="#">All Categories</a>
+					</div>
+				</div>
+			</div>
+			<div class="category-carousel">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-1.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-2.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-3.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-4.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-5.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-6.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>Accessories</h3>
+								<span class="category-count">22</span>
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Category Section-->
+<!-- Start  Highlights Section-->
+<section id="hand-Pick" class="mb-5">
+	<div class="hand-pick-title text-center">
+		<h3 class="fw-bold">This week’s highlights</h3>
+		<p>Your favorites, in new prints and styles.</p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="product-slider d-flex justify-content-between flex-wrap">
+				@foreach (Product product in Model.Products)
+				{
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="product-single-item">
+							<div class="product-thumb mb-4">
+								<a href="#" class="product-img">
+									<img class="first-image" src="assets/img/Product/@product.MainImage" alt="">
+									<img class="second-image" src="assets/img/Product/@product.HoverImage" alt="">
+								</a>
+							</div>
+							<div class="product-content">
+								<div class="product-name">
+									<h2><a href="">@product.Title</a></h2>
+								</div>
+								<div class="product-reviews">
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+								</div>
+								<div class="price-box">
+									@if (product.DiscountedPrice > 0)
+									{
+										<span class="price-regular">$@product.DiscountedPrice</span>
+										<span class="price-old"><del>$@product.Price</del></span>
+									}
+								</div>
+								<div class="product-overlay-top-left">
+									@if (product.DiscountedPrice > 0)
+									{
+										<span class="sale-price">@Math.Ceiling((((product.Price - product.DiscountedPrice) / product.Price) * 100))%</span>
+									}
+								</div>
+								<div class="heart-button">
+									<a href="#"><i class="fa-regular fa-heart"></i></a>
+								</div>
+								<div class="group-button">
+									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+									<a href=""><i class="fa-solid fa-basket-shopping"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End  Highlights Section-->
+<!-- Start  Brands Section-->
+<section id="Brands-Section" class="mb-5">
+	<div class="container">
+		<div class="brand-carousel">
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-1.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-2.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-3.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-4.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-5.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				<div class="single-brand-item">
+					<div class="brand-img">
+						<img src="assets/img/Brand/brand-6.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End  Brands Section-->
+<!-- Start Product Modal Section-->
+<section>
+	<div class="modal fade" id="product-quick-view" tabindex="-1" aria-labelledby="product-quickview" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Product Modal Section-->

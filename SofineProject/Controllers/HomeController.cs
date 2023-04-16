@@ -20,6 +20,8 @@ namespace SofineProject.Controllers
             { 
              Sliders=await _context.Sliders.Where(s=>s.IsDeleted==false).ToListAsync(),
              Products=await _context.Products.Where(p=>p.IsDeleted==false).ToListAsync(),
+             LastProducts =await _context.Products.Where(t=>t.IsDeleted ==false).OrderBy(p=>p.Id).ToListAsync(),
+             ProductTypes = await _context.ProductTypes.Where(pt=>pt.IsDeleted==false).ToListAsync(),
             };
             return View(homeVM);
         }

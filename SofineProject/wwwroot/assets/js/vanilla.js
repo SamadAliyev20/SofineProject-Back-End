@@ -1,16 +1,12 @@
 $(document).ready(function () {
-    $(".productQuickModal").on('click', function (e) {
-        e.preventDefault();
+    $(".productQuickModal").on('click', function () {
+        
         let url = $(this).attr('href');
         fetch(url).then(res => {
             return res.text();
         })
             .then(data => {
                 $('.modal-content').html(data);
-                $('.modal').on('shown.bs.modal', function (e) {
-                    e.preventDefault();
-                    $('.product-modal-carousel').slick('setPosition');
-                })
                 $('.product-modal-carousel').slick({
                     infinite: false,
                     speed: 600,
@@ -59,6 +55,23 @@ $(document).ready(function () {
                         }
                     ]
                 });
+
             })
+       
+    })
+    
+    $('.searchInput').on('keyup', function () {
+        let search = $(this).val();
+        if (search.trim().length >= 3 && search != null) {
+            fetch('product/search?search=' + search)
+                .then(res => {
+                    return res.text();
+                }).then(data => {
+                    $('.search-body').html(data);
+                })
+        }
+        else {
+            $('.search-body').html("");
+        }	
     })
 })

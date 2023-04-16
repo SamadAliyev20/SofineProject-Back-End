@@ -85,7 +85,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="product-slider d-flex justify-content-between flex-wrap">
-				@foreach (Product product in Model.Products)
+				@foreach (Product product in Model.Products.Take(10))
 				{
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 						<div class="product-single-item">
@@ -160,53 +160,12 @@
 					<div class="category-single-item">
 						<div class="category-img">
 							<a href="">
-								<img src="assets/img/Category/category-1.jpg" alt="">
+								<img src="assets/img/Category/category-5.jpg" alt="">
 							</a>
 						</div>
 						<div class="category-text">
 							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
-							</a>
-						</div>
-						<div class="category-arrow">
-							<a href="#">
-								<i class="fa-solid fa-arrow-right"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-					<div class="category-single-item">
-						<div class="category-img">
-							<a href="">
-								<img src="assets/img/Category/category-2.jpg" alt="">
-							</a>
-						</div>
-						<div class="category-text">
-							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
-							</a>
-						</div>
-						<div class="category-arrow">
-							<a href="#">
-								<i class="fa-solid fa-arrow-right"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-					<div class="category-single-item">
-						<div class="category-img">
-							<a href="">
-								<img src="assets/img/Category/category-3.jpg" alt="">
-							</a>
-						</div>
-						<div class="category-text">
-							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
+								<h3>@Model.ProductTypes.FirstOrDefault().Name</h3>
 							</a>
 						</div>
 						<div class="category-arrow">
@@ -225,8 +184,48 @@
 						</div>
 						<div class="category-text">
 							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
+								<h3>@Model.ProductTypes.Skip(1).Take(1).FirstOrDefault().Name</h3>
+								
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-1.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>@Model.ProductTypes.Skip(2).Take(2).FirstOrDefault().Name</h3>
+								
+							</a>
+						</div>
+						<div class="category-arrow">
+							<a href="#">
+								<i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="category-single-item">
+						<div class="category-img">
+							<a href="">
+								<img src="assets/img/Category/category-4.jpg" alt="">
+							</a>
+						</div>
+						<div class="category-text">
+							<a href="">
+								<h3>@Model.ProductTypes.Skip(3).Take(3).FirstOrDefault().Name</h3>
+								
 							</a>
 						</div>
 						<div class="category-arrow">
@@ -245,8 +244,8 @@
 						</div>
 						<div class="category-text">
 							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
+								<h3>@Model.ProductTypes.Skip(4).Take(4).FirstOrDefault().Name</h3>
+								
 							</a>
 						</div>
 						<div class="category-arrow">
@@ -265,8 +264,8 @@
 						</div>
 						<div class="category-text">
 							<a href="">
-								<h3>Accessories</h3>
-								<span class="category-count">22</span>
+								<h3>@Model.ProductTypes.Skip(5).Take(5).FirstOrDefault().Name</h3>
+								
 							</a>
 						</div>
 						<div class="category-arrow">
@@ -284,13 +283,13 @@
 <!-- Start  Highlights Section-->
 <section id="hand-Pick" class="mb-5">
 	<div class="hand-pick-title text-center">
-		<h3 class="fw-bold">This week’s highlights</h3>
+		<h3 class="fw-bold">Last Uploaded Products</h3>
 		<p>Your favorites, in new prints and styles.</p>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="product-slider d-flex justify-content-between flex-wrap">
-				@foreach (Product product in Model.Products)
+				@foreach (Product product in Model.LastProducts.Skip(2).Take(10))
 				{
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 						<div class="product-single-item">
@@ -393,13 +392,4 @@
 	</div>
 </section>
 <!-- End  Brands Section-->
-<!-- Start Product Modal Section-->
-<section>
-	<div class="modal fade" id="product-quick-view" tabindex="-1" aria-labelledby="product-quickview" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-			</div>
-		</div>
-	</div>
-</section>
-<!-- End Product Modal Section-->
+

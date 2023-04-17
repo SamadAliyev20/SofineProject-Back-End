@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BasketVM>
+<div class="mini-cart-inner">
+    <ul class="mini-cart-details">
+        @foreach (BasketVM basketVM in Model)
+        {
+            <li class="product-item">
+                <a class="thumb" href=""><img style="width: 78px;" src="assets/img/Product/@basketVM.Image" alt=""></a>
+                <div class="info">
+                    <a class="product-name" href="">@basketVM.Title</a>
+                    <div class="product-item-qty">
+                        <div class="number-price">
+                            <span class="qty">@(basketVM.Count)x</span>
+                            <span class="pro-price">$@basketVM.Price</span>
+                        </div>
+                        <div class="pro-qty">
+                            <button type="button" class="sub">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input type="text" value="1" />
+                            <button type="button" class="add">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pro-remove">
+                        <a style="cursor:pointer" class="product-delete" data-productId="@basketVM.Id">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </li>
+        }
+    </ul>
+</div>
+<div class="bottom-group">
+    <div class="subtotal">
+        <span class="text">Total</span>
+        <span class="pro-price">$@Model.Sum(b=>b.Count *b.Price)</span>
+    </div>
+    <div class="cms-group-button">
+        <a href="#" class="cms-button-check">Checkout</a>
+        <a asp-controller="Basket" asp-action="Index" class="cms-cart">View Cart</a>
+    </div>
+</div>

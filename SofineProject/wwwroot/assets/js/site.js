@@ -1,8 +1,96 @@
 $(document).ready(function () {
-  $('.modal').on('shown.bs.modal', function (e) {
-    e.preventDefault();
-    $('.product-modal-carousel').slick('setPosition');
-  })
+    $(".productQuickModal").on('click', function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+        fetch(url).then(res => {
+            return res.text();
+        })
+            .then(data => {
+                $('.modal-content').html(data);
+                $('.modal').modal('show');
+                $('.modal').on('shown.bs.modal', function (e) {
+                    e.preventDefault();
+                    $('.product-modal-carousel').slick('setPosition');
+                    $(".addToCart").on('click', function (e) {
+                        e.preventDefault();
+                        let productId = $(this).data('id');
+
+                        fetch('/basket/AddBasket?id=' + productId)
+                            .then(res => {
+                                return res.text();
+                            }).then(data => {
+                                $('.mini-cart-inner-content').html(data);
+                            });
+
+                    });
+                   
+                })
+                $('.product-modal-carousel').slick({
+                    infinite: false,
+                    speed: 600,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    swipe: true,
+                    fade: true,
+                    dots: true,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                swipe: true,
+                                arrows: false,
+                            }
+                        },
+                        {
+                            breakpoint: 1400,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: false,
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                arrows: false,
+                                slidesToScroll: 1,
+                                swipe: true
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                arrows: false,
+                                slidesToScroll: 1,
+                                swipe: true
+                            }
+                        }
+                    ]
+                });
+                
+            })
+
+    })
+    $('.modal').on('shown.bs.modal', function (e) {
+        e.preventDefault();
+        $('.product-modal-carousel').slick('setPosition');
+        $(".addToCart").click(function (e) {
+            e.preventDefault();
+            let productId = $(this).data('id');
+            fetch('/basket/AddBasket?id=' + productId)
+                .then(res => {
+                    return res.text();
+                }).then(data => {
+                    $('.mini-cart-inner-content').html(data);
+                });
+        });
+    })
   $('.hero-slider').slick({
     dots: true,
     infinite: false,
@@ -255,8 +343,6 @@ $(document).ready(function () {
     e.preventDefault();
     $('.mini-cart-box').toggleClass('active');
     $('.mask_opened').toggleClass('active')
-    //   document.body.style.overflow = "hidden"; // ADD THIS LINE
-    // document.body.style.height = "100%"; // ADD THIS LINE
   });
   $('.cart-close-btn').on('click', function (e) {
     e.preventDefault();
@@ -304,17 +390,6 @@ $(document).ready(function () {
   // nice select
   $('select').niceSelect();
   // nice-select
-  // product quantity
-  $('.add').click(function () {
-    if ($(this).prev().val()) {
-      $(this).prev().val(+$(this).prev().val() + 1);
-    }
-  });
-  $('.sub').click(function () {
-    if ($(this).next().val() > 1) {
-      if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
-    }
-  });
   
 
 });

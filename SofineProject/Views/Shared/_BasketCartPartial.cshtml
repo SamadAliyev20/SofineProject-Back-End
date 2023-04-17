@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BasketVM>
+<div class="container">
+    <div class="row">
+        <div class="cart-area">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="title text-center">
+                                <th>THUMBNAIL</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach (BasketVM basketVM in Model)
+                            {
+                                <tr>
+                                    <td class="pro-img">
+                                        <a href="product-details.html">
+                                            <img class="img-fluid" src="assets/img/Product/@basketVM.Image">
+                                        </a>
+                                    </td>
+                                    <td class="pro-name">@basketVM.Title</td>
+                                    <td class="pro-price"><span>$@basketVM.Price</span></td>
+                                    <td class="pro-qty">
+                                        <button type="button" class="sub">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                        <input type="text" value="@basketVM.Count" />
+                                        <button type="button" class="add">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </td>
+                                    <td class="pro-total"><span>$@(basketVM.Count * basketVM.Price)</span></td>
+                                    <td class="pro-remove">
+                                        <a style="cursor:pointer" class="product-delete" data-productId="@basketVM.Id">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12 col-sm-12 col-md-12 cart-all">
+                <div class="cart-total">
+                    <h5 class="cart-title">Cart Totals</h5>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="info-checkout">
+                        <span>Subtotal:</span>
+                        <span class="sub-total">$@Model.Sum(b=>b.Count *b.Price)</span>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="info-checkout">
+                        <span>Total:</span>
+                        <span class="pro-total">$@Model.Sum(b=>b.Count *b.Price)</span>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="pro-checkout">
+                        <button class="btn-checkout">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

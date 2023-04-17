@@ -126,7 +126,7 @@
 									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
 										<i class="fa-regular fa-eye"></i>
 									</a>
-									<a href=""><i class="fa-solid fa-basket-shopping"></i></a>
+									<a class="addToBasket" data-id="@product.Id"><i class="fa-solid fa-basket-shopping"></i></a>
 								</div>
 							</div>
 						</div>
@@ -330,7 +330,7 @@
 									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
 										<i class="fa-regular fa-eye"></i>
 									</a>
-									<a href=""><i class="fa-solid fa-basket-shopping"></i></a>
+									<a class="addToBasket" data-id="@product.Id"><i class="fa-solid fa-basket-shopping"></i></a>
 								</div>
 							</div>
 						</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BasketVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+  <!-- Start BreadCrumb Area -->
+
+  <section id="BreadCrumb-Section">
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="breadcrumb-wrap text-center">
+                  <nav aria-label="breadcrumb">
+                      <h1 class="breadcrumb-title">Cart</h1>
+                      <ul class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+   </section>
+    <!-- End BreadCrumb Area -->
+<!-- Start Cart Section-->
+<section id="Cart-Section">
+    <div class="cart-section">
+        @await Html.PartialAsync("_BasketCartPartial",Model)
+    </div>
+</section>
+<!-- End Cart Section-->

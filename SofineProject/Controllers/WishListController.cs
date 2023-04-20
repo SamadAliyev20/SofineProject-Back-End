@@ -156,7 +156,7 @@ namespace SofineProject.Controllers
 
                 foreach (WishlistVM wishlistVM in wishlistVMs)
                 {
-                    Product product = _context.Products.FirstOrDefault(p => p.Id == wishlistVM.Id && p.IsDeleted == false);
+                    Product product =_context.Products.FirstOrDefault(p => p.Id == wishlistVM.Id && p.IsDeleted == false);
 
                     if (product != null)
                     {

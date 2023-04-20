@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('select').niceSelect();
     $(".productQuickModal").on('click', function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
@@ -23,7 +24,7 @@ $(document).ready(function () {
                             });
 
                     });
-                   
+
                 })
                 $('.product-modal-carousel').slick({
                     infinite: false,
@@ -73,23 +74,9 @@ $(document).ready(function () {
                         }
                     ]
                 });
-                
+
             })
 
-    })
-    $('.modal').on('shown.bs.modal', function (e) {
-        e.preventDefault();
-        $('.product-modal-carousel').slick('setPosition');
-        $(".addToCart").click(function (e) {
-            e.preventDefault();
-            let productId = $(this).data('id');
-            fetch('/basket/AddBasket?id=' + productId)
-                .then(res => {
-                    return res.text();
-                }).then(data => {
-                    $('.mini-cart-inner-content').html(data);
-                });
-        });
     })
   $('.hero-slider').slick({
     dots: true,
@@ -130,7 +117,7 @@ $(document).ready(function () {
   $('.product-slider').slick({
     infinite: false,
     speed: 600,
-    arrows: false,
+    arrows: true,
     slidesToShow: 5,
     slidesToScroll: 1,
     swipe: true,
@@ -370,26 +357,7 @@ $(document).ready(function () {
     $('.search-content-box').toggleClass('active');
   });
   ///Search-open-close-section///
-  // pricing filter
-  var rangeSlider = $(".price-range"),
-    amount = $(".filter-amount"),
-    minPrice = rangeSlider.data('min'),
-    maxPrice = rangeSlider.data('max');
-  rangeSlider.slider({
-    range: true,
-    min: minPrice,
-    max: maxPrice,
-    values: [minPrice, maxPrice],
-    slide: function (event, ui) {
-      amount.val("$" + ui.values[0] + " - $" + ui.values[1]);
-    }
-  });
-  amount.val(" $" + rangeSlider.slider("values", 0) +
-    " - $" + rangeSlider.slider("values", 1));
-  // pricing filter
-  // nice select
-  $('select').niceSelect();
-  // nice-select
+  
   
 
 });

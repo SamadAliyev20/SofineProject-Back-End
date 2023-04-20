@@ -1,0 +1,184 @@
+﻿@model ShopVM
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+          integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+          integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/theme.min.css"
+          integrity="sha512-hbs/7O+vqWZS49DulqH1n2lVtu63t3c3MTAn0oYMINS5aT8eIAbJGDXgLt6IxDHcWyzVTgf9XyzZ9iWyVQ7mCQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slick Slider style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+          integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+          integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<div class="sidebar-area">
+    <div class="col-lg-auto col-xs-12  col-sm-4 col-md-3 col-lg-12">
+        <div class="single-sidebar-item">
+            <div class="sidebar-title">
+                Category
+            </div>
+            <div class="sidebar-body">
+                <ul class="category-list">
+                    @foreach (Category category in Model.Categories)
+                    {
+                        <li><a style="cursor:pointer" class="category-selector" data-id="@category.Id" data-productTypeId="@ViewBag.productTypeId">@category.Name<span>(@category.Products?.Count())</span></a></li>
+                    }
+
+                </ul>
+                <div class="modal-line">
+                    <hr>
+                </div>
+                <div class="sidebar-title">
+                    Product Type
+                </div>
+                <ul class="category-list">
+                    @foreach (ProductType productType in Model.ProductTypes)
+                    {
+                        <li><a style="cursor:pointer" class="productType-selector" data-id="@productType.Id" data-categoryId="@ViewBag.categoryId">@productType.Name <span>(@productType.Products?.Count())</span></a></li>
+                    }
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-line">
+        <hr>
+    </div>
+    <div class="col-lg-auto col-xs-12  col-sm-4 col-md-3 col-lg-12">
+        <div class="single-sidebar-item">
+            <div class="sidebar-title">
+                Filter By Price
+            </div>
+            <div class="sidebar-body">
+                <div class="price-range-wrap">
+                    <div class="price-range" data-min="20" data-max="
+                                400"></div>
+                    <div class="range-slider">
+                        <form>
+                            <div class="price-input">
+                                <label for="amount">Price: </label>
+                                <input type="text" id="amount" class="rangeInput">
+                            </div>
+                            <button class="filter-btn filterInput">filter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="all-products-area col">
+    <div class="row">
+        <div class="collection-name mx-4">
+            <h1>Products</h1>
+        </div>
+        <div class="control">
+            <div class="products-count mx-4">
+                <button class="mobile-sidebar-btn" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#filter-area">
+                    Filter
+                </button>
+                <span>Showing 1–20 of 37 results</span>
+            </div>
+            <div class="sort-by-area mx-5">
+                <select class="nice-select sort-select" name="sortby">
+                    <option data-sortId="1" value="1">Name (A - Z)</option>
+                    <option data-sortId="2" value="2">Name (Z - A)</option>
+                    <option data-sortId="3" value="3">Price (Low &gt; High)</option>
+                    <option  data-sortId="4" value="4">Price (High &gt; Low)</option>
+                </select>
+            </div>
+        </div>
+       @foreach (Product product in Model.Products)
+        {
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <div class="product-single-item">
+                    <div class="product-thumb mb-4">
+                        <a href="#" class="product-img">
+                            <img class="first-image" src="assets/img/Product/@product.MainImage" alt="">
+                            <img class="second-image" src="assets/img/Product/@product.HoverImage" alt="">
+                        </a>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">
+                            <h2><a href="">@product.Title</a></h2>
+                        </div>
+                        <div class="product-reviews">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div class="price-box">
+                            @if (product.DiscountedPrice > 0)
+                            {
+                                <span class="price-regular">$@product.DiscountedPrice</span>
+                                <span class="price-old"><del>$@product.Price</del></span>
+                            }
+                        </div>
+                        <div class="product-overlay-top-left">
+                            @if (product.DiscountedPrice > 0)
+                            {
+                                <span class="sale-price">@Math.Ceiling((((product.Price - product.DiscountedPrice) / product.Price) * 100))%</span>
+                            }
+                        </div>
+                        <div class="heart-button">
+                            <a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                        <div class="group-button">
+                            <a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
+                            <a class="addToBasket" data-id="@product.Id"><i class="fa-solid fa-basket-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"
+    integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
+            integrity="sha512-NqYds8su6jivy1/WLoW8x1tZMRD7/1ZfhWG/jcRQLOzV1k1rIODCpMgoBnar5QXshKJGV7vi0LXLNXPoFsM5Zg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+            integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<!-- Slick Slider script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
+        integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="~/assets/js/vanilla.js"></script>
+    <script>
+    $(".productQuickModal").on('click', function () {
+        let url = $(this).attr('href');
+        fetch(url).then(res => {
+            return res.text();
+        })
+            .then(data => {
+                $('.modal-content').html(data);
+                $('.modal').modal('show');
+                $('.product-modal-carousel').slick({
+                    arrows: false
+
+                });
+            })
+
+    })
+    </script>

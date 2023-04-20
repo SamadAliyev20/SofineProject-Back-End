@@ -1,0 +1,115 @@
+﻿@model ShopVM
+
+<!-- Start BreadCrumb Area -->
+<section id="BreadCrumb-Section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap text-center">
+                    <nav aria-label="breadcrumb">
+                        <h1 class="breadcrumb-title">Shop</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End BreadCrumb Area -->
+<!-- Start  OFf Canvas-Filter Section-->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="filter-area" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <div class="single-sidebar-item">
+                <div class="sidebar-title">
+                    Category
+                </div>
+                <div class="sidebar-body">
+                    <ul class="category-list">
+                        <li><a href="#">All Categories <span>(20)</span></a></li>
+                        <li><a href="#">Mens <span>(10)</span></a></li>
+                        <li><a href="#">Womens <span>(05)</span></a></li>
+                    </ul>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="sidebar-title">
+                        Product Type
+                    </div>
+                    <ul class="category-list">
+                        <li><a href="#">All Categories <span>(20)</span></a></li>
+                        <li><a href="#">Backpacks <span>(10)</span></a></li>
+                        <li><a href="#">Sunglasses <span>(05)</span></a></li>
+                        <li><a href="#">Shirts <span>(15)</span></a></li>
+                        <li><a href="#">Tops <span>(12)</span></a></li>
+                        <li><a href="#">Accessories <span>(20)</span></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-line">
+            <hr>
+        </div>
+        <div class="single-sidebar-item">
+            <div class="sidebar-title">
+                Filter By Price
+            </div>
+            <div class="sidebar-body">
+                <div class="price-range-wrap">
+                    <div class="price-range" data-min="20" data-max="400"></div>
+                    <div class="range-slider">
+                        <form action="#">
+                            <div class="price-input">
+                                <label for="amount">Price:</label>
+                                <input type="text" class="filter-amount">
+                            </div>
+                            <button class="filter-btn">filter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+      </div>
+<!-- End  OFf Canvas-Filter Section-->
+<!-- Start  All Products Section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="shop-main-area">
+                @await Html.PartialAsync("_ProductListPartial", Model)
+                
+  
+            </div>
+        </div>
+        </div>
+</section>
+<!-- End  All Products Section-->
+<!-- Start  Paginaton Section-->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- End  Paginaton Section-->

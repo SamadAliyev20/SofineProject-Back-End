@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WishlistVM>
+<div class="mini-cart-inner">
+    <ul class="mini-cart-details">
+        @foreach (WishlistVM wishlistVM in Model)
+        {
+            <li class="product-item">
+            <a class="thumb" href=""><img style="width: 78px;" src="~/assets/img/Product/@wishlistVM.Image" alt=""></a>
+            <div class="info">
+                <a class="product-name" href="">@wishlistVM.Title</a>
+                <div class="product-item-qty">
+                    <div class="number-price">
+                        <span class="pro-price">$@wishlistVM.Price</span>
+                    </div>
+                </div>
+                <div class="pro-remove">
+                        <a style="cursor:pointer" class="delete-wishList"data-productId="@wishlistVM.Id">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+<div class="bottom-group">
+    <div class="subtotal">
+    </div>
+    <div class="cms-group-button">
+        <a href="#" class="cms-button-check">View wishlist</a>
+    </div>
+</div>

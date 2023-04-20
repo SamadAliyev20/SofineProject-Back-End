@@ -7,6 +7,7 @@ namespace SofineProject.ViewModels.ShopViewModels
 		public IEnumerable<Category> Categories { get; set; }
 		public IEnumerable<ProductType> ProductTypes { get; set; }
 		public IEnumerable<Product> Products { get;set; }
-
+        public string SortBy { get; set; }
+        public string Filter { get; set; }
     }
 }

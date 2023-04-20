@@ -86,9 +86,99 @@
     <div class="container">
         <div class="row">
             <div class="shop-main-area">
-                @await Html.PartialAsync("_ProductListPartial", Model)
-                
-  
+                <div class="sidebar-area">
+                    <div class="col-lg-auto col-xs-12  col-sm-4 col-md-3 col-lg-12">
+                        <div class="single-sidebar-item">
+                            <div class="sidebar-title">
+                                Category
+                            </div>
+                            <div class="sidebar-body">
+                                <ul class="category-list">
+                                    @foreach (Category category in Model.Categories)
+                                    {
+                                        <li><a style="cursor:pointer" class="category-selector" asp-route-categoryId="@category.Id" asp-route-productTypeId="@ViewBag.productTypeId">@category.Name<span>(@category.Products?.Count())</span></a></li>
+                                    }
+
+                                </ul>
+                                <div class="modal-line">
+                                    <hr>
+                                </div>
+                                <div class="sidebar-title">
+                                    Product Type
+                                </div>
+                                <ul class="category-list">
+                                    @foreach (ProductType productType in Model.ProductTypes)
+                                    {
+                                        <li><a style="cursor:pointer" class="productType-selector" asp-route-productTypeId="@productType.Id" asp-route-categoryId="@ViewBag.categoryId">@productType.Name <span>(@productType.Products?.Count())</span></a></li>
+                                    }
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="col-lg-auto col-xs-12  col-sm-4 col-md-3 col-lg-12">
+                        <div class="single-sidebar-item">
+                            <div class="sidebar-title">
+                                Filter By Price
+                            </div>
+                            <div class="sidebar-body">
+                                <div class="price-range-wrap">
+                                    <div class="price-range" data-min="20" data-max="
+                                400"></div>
+                                    <div class="range-slider">
+                                        <form>
+                                            <div class="price-input">
+                                                <label for="amount">Price: </label>
+                                                <input type="text" id="amount" class="rangeInput">
+                                            </div>
+                                            <button class="filter-btn filterInput">filter</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="all-products-area col">
+                    <div class="row">
+                        <div class="collection-name mx-4">
+                            <h1>Products</h1>
+                        </div>
+                        <div class="control">
+                            <div class="products-count mx-4">
+                                <button class="mobile-sidebar-btn" type="button" data-bs-toggle="offcanvas"
+                                        data-bs-target="#filter-area">
+                                    Filter
+                                </button>
+                                <span>Showing 1–20 of 37 results</span>
+                            </div>
+                            <div class="sort-by-area mx-5">
+                                <form method="post" asp-controller="Shop" asp-action="Index" id="my-form">
+										<div class="product-short">
+											<p>Sort By:</p>
+											<select class="nice-select" asp-for="SortBy" asp-route-filter="@Model.Filter" asp-route-sortby="@Model.SortBy" onchange="submitForm()" form="my-form">
+												<option value="1">Name (A - Z)</option>
+												<option value="2">Name (Z - A)</option>
+												<option value="3">Price (Low &gt; High)</option>
+												<option value="4">Price (High &gt; Low)</option>
+											</select>
+										</div>
+									</form>
+                            </div>
+                        </div>
+                        <div class="pro-areas">
+                            <div class="row pro-area">
+                                @await Html.PartialAsync("_ProductListPartial",Model.Products)
+                           </div>
+                        </div>
+
+                    </div>
+                </div>               
             </div>
         </div>
         </div>
@@ -113,3 +203,9 @@
     </ul>
 </nav>
 <!-- End  Paginaton Section-->
+<script>
+    function submitForm() {
+        var form = document.getElementById("my-form");
+        form.submit();
+    }
+</script>

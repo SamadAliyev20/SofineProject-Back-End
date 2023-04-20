@@ -1,332 +1,347 @@
 ﻿@inject ILayoutService layoutService
 @{
-    IEnumerable<BasketVM> basketVMs = await layoutService.GetBaskets();
-    IEnumerable<WishlistVM> wishlistVMs = await layoutService.GetWishlists();
+	IEnumerable<BasketVM> basketVMs = await layoutService.GetBaskets();
+	IEnumerable<WishlistVM> wishlistVMs = await layoutService.GetWishlists();
 }
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
-      integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/theme.min.css"
-      integrity="sha512-hbs/7O+vqWZS49DulqH1n2lVtu63t3c3MTAn0oYMINS5aT8eIAbJGDXgLt6IxDHcWyzVTgf9XyzZ9iWyVQ7mCQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-hbs/7O+vqWZS49DulqH1n2lVtu63t3c3MTAn0oYMINS5aT8eIAbJGDXgLt6IxDHcWyzVTgf9XyzZ9iWyVQ7mCQ=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
-      integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Slick Slider style -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
-  integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
-  integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!--=== Bootstrap CSS ===-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!--=== Main Style CSS ===-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 <link href="~/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+	  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="shortcut icon" type="image/png" href="~/assets/img/favi_32x.png">
 <title>Sofine Shopify Theme– Sofine store</title>
 
 <body>
-  <!-- Start Header Area -->
-  <header>
-    <div class="container p-1">
-      <div class="row mt-3">
-        <div class="col-4 col-md-2 col-lg-1 logo">
-          <a asp-controller="Home" asp-action="Index"><img src="~/assets/img/Logo/logo.png" alt=""></a>
-        </div>
-        <div class="col-8 col-md-11">
-          <div class="d-flex justify-content-end align-items-center">
-            <div class="menu-toggle ">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="navlist">
-              <ul>
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
-                <li><a asp-controller="About" asp-action="Index">About</a></li>
-                <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
-                <div class="nav-items d-flex">
-                  <li><a href="#" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></a></li>
-                  <li>
-                      <a href="#" class="minicart-btn">
-                          <i class="fa-solid fa-basket-shopping"></i>
-                      <span
-                        class="count">@basketVMs.Count()</span></a>
-                    </li>
-                  <li><a href="#" class="miniwishlist-btn"><i class="fa-regular fa-heart"></i><span
-                        class="wish-count">0</span></a></li>
-                  <li>   
-                  <div class="dropdown">
-                    <a href="#">
-                      <i class="fa-solid fa-gear"></i>
-                  </a>
-                    <div class="dropdown-content">
-                      <a href="login.html">Sign In</a>
-                      <a href="register.html">Sign Up</a>
-                      <a href="my-account.html">My Account</a>
-                    </div>
-                  </div>
-                </li>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- Start Mobile Header Area -->
-  <section id="Mobile-Header-Section">
-    <div class="container-mobile">
-      <div class="mobile-header">
-        <div class="hamburger-menu">
-          <button class="hamburger-btn">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-        </div>
+	<!-- Start Header Area -->
+	<header>
+		<div class="container p-1">
+			<div class="row mt-3">
+				<div class="col-4 col-md-2 col-lg-1 logo">
+					<a asp-controller="Home" asp-action="Index"><img src="~/assets/img/Logo/logo.png" alt=""></a>
+				</div>
+				<div class="col-8 col-md-11">
+					<div class="d-flex justify-content-end align-items-center">
+						<div class="menu-toggle ">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+						<div class="navlist">
+							<ul>
+								<li><a asp-controller="Home" asp-action="Index">Home</a></li>
+								<li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
+								<li><a asp-controller="About" asp-action="Index">About</a></li>
+								<li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+								<div class="nav-items d-flex">
+								<li><a href="#" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+								<li>
+									<a href="#" class="minicart-btn">
+										<i class="fa-solid fa-basket-shopping"></i>
+										<span class="count">@basketVMs.Count()</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="miniwishlist-btn">
+										<i class="fa-regular fa-heart"></i><span class="wish-count">@wishlistVMs.Count()</span>
+									</a>
+								</li>
+								<li>
+									<div class="dropdown">
+										<a href="#">
+											<i class="fa-solid fa-gear"></i>
+										</a>
+										<div class="dropdown-content">
+												@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+												{
+												<a asp-controller="Account" asp-action="My Account">My Account</a>
+												<a asp-controller="Order" asp-action="checkout">CheckOut</a>
+												<a asp-controller="Account" asp-action="Logout">Sign Out</a>
+												}
+												else
+												{
+												<a asp-controller="Account" asp-action="Login">Sign In</a>
+												<a asp-controller="Account" asp-action="Register">Sign Up</a>
+												}
+										</div>
+									</div>
+								</li>
+						</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</header>
+	<!-- Start Mobile Header Area -->
+	<section id="Mobile-Header-Section">
+		<div class="container-mobile">
+			<div class="mobile-header">
+				<div class="hamburger-menu">
+					<button class="hamburger-btn">
+						<i class="fa-solid fa-bars"></i>
+					</button>
+				</div>
 
-        <div class="mobile-logo">
-          <a href="index.html"><img src="~/assets/img/Logo/logo.png" alt="">
-          </a>
-        </div>
-        <div class="mobile-basket">
-                    <a href="#" class="minicart-btn"><i class="fa-solid fa-basket-shopping"></i><span class="count">@basketVMs.Count()</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="hamburger-menu-section">
-    <div class="mobile-menu-content-box">
-      <div class="mobile-close-btn">
-        CLOSE
-        <i class="fa-solid fa-x"></i>
-      </div>
-      <div class="mobile-search-box">
-        <h4>WHAT ARE YOU LOOKING FOR?</h4>
-        <a href="#" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
-      </div>
-      <ul class="mobile-btns">
-        <li>
-          <a href="login.html">
-            Login/Register
-          </a>
-        </li>
-        <li>
-          <a href="/">
-            HOME
-          </a>
-        </li>
-        <li>
-          <a href="shop.html">
-            SHOP
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            WISHLIST(0)
-          </a>
-        </li>
-        <li>
-          <a href="contact.html">
-            CONTACT US
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="mask-overlay mask_opened">
-    </div>
-  </section>
-  <!-- End Mobile Header Area -->
-  <!-- End Header Area -->
-  <!-- Start Main Area -->
-  <main>
-      @RenderBody()
-    <!-- Start  Mobile-Desktop-Cart Section-->
-        <section id="Mini-Cart-Box-Section">
-            <div class="mini-cart-box">
-                <div class="mini-cart-header">
-                    <div class="mini-cart-title">
-                        Shopping Cart
-                    </div>
-                    <div class="cart-close-btn">
-                        <i class="fa-solid fa-x"></i>
-                    </div>
-                </div>
-                <div class="mini-cart-inner-content">
-                    @await Html.PartialAsync("_BasketMiniCartPartial",basketVMs)
-                </div>
-            </div>
-        </section>
-    <!-- Start  Mobile-Desktop-Cart Section-->
-        <!-- Start Product Modal Section-->
-        <section>
-            <div class="modal fade" id="product-quick-view" tabindex="-1" aria-labelledby="product-quickview" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-responsive">
-                    <div class="modal-content">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Product Modal Section-->
-    <!-- Start  Mobile-Desktop-Wishlist Section-->
-        <section id="Wishlist-Box-Section">
-            <div class="wishlist-box">
-                <div class="wishlist-header">
-                    <div class="wishlist-title">
-                        Wishlist
-                    </div>
-                    <div class="wislist-close-btn">
-                        <i class="fa-solid fa-x"></i>
-                    </div>
-                </div>
-                <div class="wishlist-inner-content">
-                    @await Html.PartialAsync("_WishlistMiniPartial",wishlistVMs)
-                </div>
-            </div>
-        </section>
-    <!-- End  Mobile-Desktop-Wishlist Section-->
-    <!-- Start  Mobile-Desktop-Search Section-->
-    <section id="Search-Section">
-      <div class="search-content-box">
-        <div class="search-close-btn">
-          <i class="fa-solid fa-x"></i>
-        </div>
-        <div class="search-inner">
-          <h4 class="fw-bolder text-center">WHAT ARE YOU LOOKING FOR?</h4>
-                    <input class="search-main-box searchInput" type="text" placeholder="Search...">
-                    <div class="search-body">
-                    </div>
-        </div>
-      </div>
+				<div class="mobile-logo">
+					<a href="index.html">
+						<img src="~/assets/img/Logo/logo.png" alt="">
+					</a>
+				</div>
+				<div class="mobile-basket">
+					<a href="#" class="minicart-btn"><i class="fa-solid fa-basket-shopping"></i><span class="count">@basketVMs.Count()</span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="hamburger-menu-section">
+		<div class="mobile-menu-content-box">
+			<div class="mobile-close-btn">
+				CLOSE
+				<i class="fa-solid fa-x"></i>
+			</div>
+			<div class="mobile-search-box">
+				<h4>WHAT ARE YOU LOOKING FOR?</h4>
+				<a href="#" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+			</div>
+			<ul class="mobile-btns">
+				<li>
+					<a href="login.html">
+						Login/Register
+					</a>
+				</li>
+				<li>
+					<a href="/">
+						HOME
+					</a>
+				</li>
+				<li>
+					<a href="shop.html">
+						SHOP
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						WISHLIST(0)
+					</a>
+				</li>
+				<li>
+					<a href="contact.html">
+						CONTACT US
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="mask-overlay mask_opened">
+		</div>
+	</section>
+	<!-- End Mobile Header Area -->
+	<!-- End Header Area -->
+	<!-- Start Main Area -->
+	<main>
+		@RenderBody()
+		<!-- Start  Mobile-Desktop-Cart Section-->
+		<section id="Mini-Cart-Box-Section">
+			<div class="mini-cart-box">
+				<div class="mini-cart-header">
+					<div class="mini-cart-title">
+						Shopping Cart
+					</div>
+					<div class="cart-close-btn">
+						<i class="fa-solid fa-x"></i>
+					</div>
+				</div>
+				<div class="mini-cart-inner-content">
+					@await Html.PartialAsync("_BasketMiniCartPartial",basketVMs)
+				</div>
+			</div>
+		</section>
+		<!-- Start  Mobile-Desktop-Cart Section-->
+		<!-- Start Product Modal Section-->
+		<section>
+			<div class="modal fade" id="product-quick-view" tabindex="-1" aria-labelledby="product-quickview" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable modal-responsive">
+					<div class="modal-content">
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Product Modal Section-->
+		<!-- Start  Mobile-Desktop-Wishlist Section-->
+		<section id="Wishlist-Box-Section">
+			<div class="wishlist-box">
+				<div class="wishlist-header">
+					<div class="wishlist-title">
+						Wishlist
+					</div>
+					<div class="wislist-close-btn">
+						<i class="fa-solid fa-x"></i>
+					</div>
+				</div>
+				<div class="wishlist-inner-content">
+					@await Html.PartialAsync("_WishlistMiniPartial",wishlistVMs)
+				</div>
+			</div>
+		</section>
+		<!-- End  Mobile-Desktop-Wishlist Section-->
+		<!-- Start  Mobile-Desktop-Search Section-->
+		<section id="Search-Section">
+			<div class="search-content-box">
+				<div class="search-close-btn">
+					<i class="fa-solid fa-x"></i>
+				</div>
+				<div class="search-inner">
+					<h4 class="fw-bolder text-center">WHAT ARE YOU LOOKING FOR?</h4>
+					<input class="search-main-box searchInput" type="text" placeholder="Search...">
+					<div class="search-body">
+					</div>
+				</div>
+			</div>
 
 
-    </section>
-    <!-- End  Mobile-Desktop-Search Section-->
-  </main>
-  <!-- End Main Area -->
-  <!-- Start Footer Area -->
-  <footer id="Main-Footer-Section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="logo-footer">
-            <a href="#">
-              <img src="~/assets/img/Logo/logo.png" alt="">
-            </a>
-          </div>
-          <div class="information">
-            <h4 class="fw-bold mt-2">Let's Talk</h4>
-            <p>+994 50 760 06 49</p>
-            <p>aliyevsamed07@gmail.com</p>
-          </div>
-          <div class="contact-us">
-            <h4 class="fw bold mt-2">Contact Us</h4>
-            <p>1418 Riverwood Drive, Suite 3245 Cottonwood
-              CA 96052, United States</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <span class="footer-title fw-bold fs-5">
-            Get Help
-          </span>
-          <ul class="footer-items">
-            <li class="footer-item">
-              <a href="#">
-                About Us
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Track order
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Delivery Information
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Sale Terms & Conditions
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Returns & Refunds
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Privacy Notice
-              </a>
-            </li>
-            <li class="footer-item">
-              <a href="#">
-                Shopping FAQs
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="footer-title fw-bold fs-5">
-            <h4>Let’s stay in touch</h4>
-          </div>
-          <div class="subscribe-area position-relative">
-            <input type="email" placeholder="Enter Your Email...">
-            <a class="sub-btn" href="">Subscribe</a>
-            <p>Keep up to date with our latest news and special offers.</p>
-          </div>
-          <div class="follow-us-area">
-            <h4>Follow Us</h4>
-            <div class="social-icons">
-              <i class="fa-brands fa-facebook-f"></i>
-              <i class="fa-brands fa-twitter"></i>
-              <i class="fa-brands fa-whatsapp"></i>
-              <i class="fa-brands fa-telegram"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- End Footer Area -->
-  <!--=======================Javascript============================-->
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"
-    integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
-            integrity="sha512-NqYds8su6jivy1/WLoW8x1tZMRD7/1ZfhWG/jcRQLOzV1k1rIODCpMgoBnar5QXshKJGV7vi0LXLNXPoFsM5Zg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
-            integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Slick Slider script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
-    integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-    <script src="~/assets/js/site.js" ></script>
-    <script src="~/assets/js/vanilla.js"></script>
-  <!--=======================Javascript============================-->
+		</section>
+		<!-- End  Mobile-Desktop-Search Section-->
+	</main>
+	<!-- End Main Area -->
+	<!-- Start Footer Area -->
+	<footer id="Main-Footer-Section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="logo-footer">
+						<a href="#">
+							<img src="~/assets/img/Logo/logo.png" alt="">
+						</a>
+					</div>
+					<div class="information">
+						<h4 class="fw-bold mt-2">Let's Talk</h4>
+						<p>+994 50 760 06 49</p>
+						<p>aliyevsamed07@gmail.com</p>
+					</div>
+					<div class="contact-us">
+						<h4 class="fw bold mt-2">Contact Us</h4>
+						<p>
+							1418 Riverwood Drive, Suite 3245 Cottonwood
+							CA 96052, United States
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<span class="footer-title fw-bold fs-5">
+						Get Help
+					</span>
+					<ul class="footer-items">
+						<li class="footer-item">
+							<a href="#">
+								About Us
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Track order
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Delivery Information
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Sale Terms & Conditions
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Returns & Refunds
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Privacy Notice
+							</a>
+						</li>
+						<li class="footer-item">
+							<a href="#">
+								Shopping FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="footer-title fw-bold fs-5">
+						<h4>Let’s stay in touch</h4>
+					</div>
+					<div class="subscribe-area position-relative">
+						<input type="email" placeholder="Enter Your Email...">
+						<a class="sub-btn" href="">Subscribe</a>
+						<p>Keep up to date with our latest news and special offers.</p>
+					</div>
+					<div class="follow-us-area">
+						<h4>Follow Us</h4>
+						<div class="social-icons">
+							<i class="fa-brands fa-facebook-f"></i>
+							<i class="fa-brands fa-twitter"></i>
+							<i class="fa-brands fa-whatsapp"></i>
+							<i class="fa-brands fa-telegram"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer Area -->
+	<!--=======================Javascript============================-->
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"
+			integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
+			integrity="sha512-NqYds8su6jivy1/WLoW8x1tZMRD7/1ZfhWG/jcRQLOzV1k1rIODCpMgoBnar5QXshKJGV7vi0LXLNXPoFsM5Zg=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+			integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- Slick Slider script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
+			integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"></script>
+	@RenderSection("Scripts",false);
+	<script src="~/assets/js/site.js"></script>
+	<script src="~/assets/js/vanilla.js"></script>
+	<!--=======================Javascript============================-->
 </body>
 
 </html>

@@ -1916,9 +1916,6 @@ header {
     align-items: center;
     justify-content: space-between;
 }
-.my-sweet-alert .swal2-container {
-    z-index: 9999 !important;
-}
 @media(max-width:575px) {
     .product-single-item .group-button {
         opacity: 1;

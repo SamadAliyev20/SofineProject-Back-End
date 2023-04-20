@@ -1,0 +1,209 @@
+﻿@model ProductReviewVM
+<!-- Start BreadCrumb Area -->
+   <section id="BreadCrumb-Section">
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="breadcrumb-wrap text-center">
+                  <nav aria-label="breadcrumb">
+                      <h1 class="breadcrumb-title">Product Details</h1>
+                      <ul class="breadcrumb">
+                          <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Shop" asp-action="Index">Shop</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+   </section>
+    <!-- End BreadCrumb Area -->
+<!-- Start  Product-Details Section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="product-details-area">
+                <div class="product-modal-carousel col-xs-12 col-sm-12 col-12 col-md-12 col-lg-6">
+                    @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count() > 0)
+                    {
+                        @foreach (ProductImage productImage in Model.Product.ProductImages)
+                        {
+                            <div class="pr-img"><img src="~/assets/img/Product/@productImage.Image"></div>
+                        }
+                    }
+                </div>
+                <div class="product-details col-xs-12 col-sm-12 col-12 col-md-12 col-lg-6">
+                    <div class="product-name">
+                        <h2><a href="">@Model.Product.Title</a></h2>
+                    </div>
+                    <div class="product-reviews">
+                        <span class="stars">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </span>
+                        <span class="total-reviews">
+                            No Reviews
+                        </span>
+                        <a href="#" class="write-review">Write a Review</a>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="price-box">
+                        @if (Model.Product.DiscountedPrice > 0)
+                        {
+                            <span class="price-regular">$@Model.Product.DiscountedPrice</span>
+                            <span class="price-old"><del>$@Model.Product.Price</del></span>
+                        }
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="product-add-qty">
+                        <div class="product-qty">
+                            <input type="number" value="1" min="0" max="10">
+                        </div>
+                        <div class="product-add-to-cart-btn">
+                            <a class="addToCard" data-id="@Model.Product.Id">Add To Cart</a>
+                        </div>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="product-stock">
+                        <span class="fw-bold mx-2">Stock:</span><span class="stock-check">In Stock</span>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div id="add-to-wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                        <a style="cursor:pointer" class="addToWishlist" data-id="@Model.Product.Id">ADD TO WISHLIST</a>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="follow-us-area">
+                        <h5>Share:</h5>
+                        <div class="social-icons">
+                            <i class="fa-brands fa-facebook-f"></i>
+                            <i class="fa-brands fa-twitter"></i>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                    </div>
+                    <div class="modal-line">
+                        <hr>
+                    </div>
+                    <div class="product-mini-description">
+                        <h4>Description</h4>
+                        <p>
+                            @Model.Product.ShortDescription
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End  Product-Details Section-->
+<!-- Start  Product-Tab-menu Section-->
+<section id="Product-Tab-Menu-Section">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="home" aria-selected="true">Description</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">Shipping</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">Reviews(0)</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <div class="row">
+                    <div class="long-description col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                         @Model.Product.LongDescription
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                <div class="row">
+                    <div class="shipping col-xs-12 col-sm-12 col-lg-6">
+                        Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.
+                        We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                <form action="#" class="review-form">
+                    <h5>1 review for <span>Samad Aliyev</span></h5>
+                    <div class="total-reviews">
+                        <div class="rev-avatar">
+                            <img src="assets/img/about/avatar.jpg" alt="">
+                        </div>
+                        <div class="review-box">
+                            <div class="ratings">
+                                <span class="good"><i class="fa fa-star"></i></span>
+                                <span class="good"><i class="fa fa-star"></i></span>
+                                <span class="good"><i class="fa fa-star"></i></span>
+                                <span class="good"><i class="fa fa-star"></i></span>
+                                <span><i class="far fa-star"></i></span>
+                            </div>
+                            <div class="post-author">
+                                <p><span>Samad -</span> 12 April, 2023</p>
+                            </div>
+                            <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut venenatis vitae, malesuada ut mi. Quisque iaculis, dui congue placerat pretium, augue erat accumsan lacus</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Review</label>
+                            <textarea class="form-control" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="5">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="4">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="2">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="1">1 star</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="sqr-btn" type="submit">Add Review</button>
+                    </div>
+                </form> <!-- end of review-form -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End  Product-Tab-menu Section-->

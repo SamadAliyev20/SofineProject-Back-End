@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\manage\Views\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

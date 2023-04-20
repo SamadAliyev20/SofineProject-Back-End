@@ -87,14 +87,42 @@ $(document).ready(function () {
             }
         })
     })
-    $(".addToWishlist").on('click', function (e) {
+    $(".addToCard").on('click', function (e) {
         e.preventDefault();
+        let productId = $(this).attr('data-id');
 
-        let productId = $(this).data('id');
-        fetch('Wishlist/AddWishlist?id=' + productId)
+        fetch('/basket/AddBasket?id=' + productId)
             .then(res => {
                 return res.text();
             }).then(data => {
+                $('.mini-cart-inner-content').html(data);
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'bottom-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: false,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Məhsul Səbətə Əlavə Olundu'
+                })
+            });
+
+    });
+    $(".addToWishlist").on('click', function (e) {
+        e.preventDefault();
+        let productId = $(this).attr('data-id');
+        fetch('/Wishlist/AddWishlist?id=' + productId)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                console.log(data)
                 $('.wishlist-inner-content').html(data)
                 const Toast = Swal.mixin({
                     toast: true,
@@ -116,12 +144,17 @@ $(document).ready(function () {
     })
     $(document).on('click', '.delete-wishList', function (e) {
         e.preventDefault();
-        let productId = $(this).attr('data-productId');
-        fetch('Wishlist/DeleteWishList/' + productId).then(res => {
+        let productId = $(this).attr('data-id');
+        fetch('/Wishlist/DeleteWishList/' + productId).then(res => {
             return res.text();
         }).then(data => {
             if (data != null) {
                 $('.wishlist-inner-content').html(data)
+                fetch('/Wishlist/GetWishlistForCart/').then(res => {
+                    return res.text();
+                }).then(data => {
+                    $('.wish-area').html(data)
+                })
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'bottom-start',
@@ -139,11 +172,7 @@ $(document).ready(function () {
                     title: 'Məhsul İstəklərdən silindi'
                 })
             }
-            fetch('/Wishlist/GetWishlistForCart/').then(res => {
-                return res.text();
-            }).then(data => {
-                $('.wish-area').html(data)
-            })
+           
         })
     })
     // pricing filter

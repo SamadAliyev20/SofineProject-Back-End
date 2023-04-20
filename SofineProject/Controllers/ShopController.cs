@@ -73,8 +73,6 @@ namespace SofineProject.Controllers
 
             return View(shopVM);
         }
-
-
         public async Task<IActionResult> RangeFilter(string? range = "")
         {
             double minValue = 0;
@@ -99,5 +97,29 @@ namespace SofineProject.Controllers
             return PartialView("_ProductListPartial", product);
 
         }
+
+        public async Task<IActionResult> Detail(int? productId)
+        {
+			if (productId == null)
+			{
+				return BadRequest();
+			}
+			Product product = await _context.Products
+				.Include(p => p.ProductImages.Where(p => p.IsDeleted == false))
+				.Include(p => p.Reviews.Where(p => p.IsDeleted == false))
+				.FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == productId);
+
+			if (product == null)
+			{
+				return NotFound();
+			}
+			ProductReviewVM productReviewVM = new ProductReviewVM
+			{
+				Product = product,
+				Review = new Review { ProductId = productId },
+			};
+
+			return View(productReviewVM);
+		}
     }
 }

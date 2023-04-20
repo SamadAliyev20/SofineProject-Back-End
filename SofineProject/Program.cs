@@ -29,11 +29,21 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+});
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+          );
 app.MapControllerRoute("default", "{controller=home}/{action=Index}/{id?}");
 app.Run();

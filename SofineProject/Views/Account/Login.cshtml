@@ -1,0 +1,63 @@
+﻿@model LoginVM
+<!-- Start BreadCrumb Area -->
+   <section id="BreadCrumb-Section">
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="breadcrumb-wrap text-center">
+                  <nav aria-label="breadcrumb">
+                      <h1 class="breadcrumb-title">Sign-In</h1>
+                      <ul class="breadcrumb">
+                          <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Sign-In</li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+   </section>
+    <!-- End BreadCrumb Area -->
+<!-- login register wrapper start -->
+<div class="login-register-wrapper section-padding">
+    <div class="container">
+        <div class="member-area-from-wrap">
+            <div class="row justify-content-center">
+                <!-- Login Content Start -->
+                <div class="col-lg-6">
+                    <div class="login-reg-form-wrap">
+                        <h2>Sign In</h2>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text text-danger"></div>
+                            <div class="single-input-item">
+                                <input asp-for="Email" class="input-box" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="Password" class="input-box" placeholder="Enter your Password" />
+                                <span asp-validation-for="Password" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta">
+                                        <input type="checkbox" asp-for="RemindMe" class="remember-me-check">
+                                        <label for="">Remember Me</label>
+                                        <div class="create-account">
+                                            <a asp-controller="Account" asp-action="Register">Create New Account</a>
+                                        </div>
+                                    </div>
+                                    <a asp-controller="Account" asp-action="ForgotPassword" class="forget-pwd">Forget Password?</a>
+                                </div>
+                            </div>
+                            <div class="single-input-item">
+                                <button class="login-btn">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Login Content End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- login register wrapper end -->

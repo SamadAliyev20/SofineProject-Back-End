@@ -1,0 +1,80 @@
+﻿@model RegisterVM
+<!-- Start BreadCrumb Area -->
+<section id="BreadCrumb-Section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap text-center">
+                    <nav aria-label="breadcrumb">
+                        <h1 class="breadcrumb-title">Register</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Register</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End BreadCrumb Area -->
+<!-- login register wrapper start -->
+<div class="login-register-wrapper section-padding">
+    <div class="container">
+        <div class="member-area-from-wrap">
+            <div class="row justify-content-center">
+                <!-- Login Content Start -->
+                <div class="col-lg-6">
+                    <div class="login-reg-form-wrap">
+                        <h2>Register</h2>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text text-danger"></div>
+                            <div class="single-input-item">
+                                <input asp-for="Name" class="input-box" placeholder="Name" />
+                                <span asp-validation-for="Name" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="SurName" class="input-box" placeholder="SurName" />
+                                <span asp-validation-for="SurName" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="UserName" class="input-box" placeholder="UserName" />
+                                <span asp-validation-for="UserName" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="Email" class="input-box" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="Password" class="input-box" placeholder="Enter your Password" />
+                                <span asp-validation-for="Password" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <input asp-for="ConfirmPassword" class="input-box" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" class="text text-danger"></span>
+                            </div>
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta">
+                                        <div class="create-account">
+                                            <a asp-controller="Account" asp-action="Login">Already have a Account? Sign In</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-input-item">
+                                <button class="register-btn">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Login Content End -->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_Validation");
+}
+<!-- login register wrapper end -->
+

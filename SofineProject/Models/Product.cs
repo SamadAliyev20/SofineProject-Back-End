@@ -38,5 +38,7 @@ namespace SofineProject.Models
         [NotMapped]
         public IFormFile? HoverFile { get; set; }
 
-    }
+		public IEnumerable<Review>? Reviews { get; set; }
+
+	}
 }

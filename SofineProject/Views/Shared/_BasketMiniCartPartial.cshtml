@@ -4,9 +4,9 @@
         @foreach (BasketVM basketVM in Model)
         {
             <li class="product-item">
-                <a class="thumb" href=""><img style="width: 78px;" src="assets/img/Product/@basketVM.Image" alt=""></a>
+                <a class="thumb" asp-controller="Shop" asp-action="Detail" asp-route-productId="@basketVM.Id"><img style="width: 78px;" src="~/assets/img/Product/@basketVM.Image" alt=""></a>
                 <div class="info">
-                    <a class="product-name" href="">@basketVM.Title</a>
+                    <a class="product-name" asp-controller="Shop" asp-action="Detail" asp-route-productId="@basketVM.Id">@basketVM.Title</a>
                     <div class="product-item-qty">
                         <div class="number-price">
                             <span class="qty">@(basketVM.Count)x</span>

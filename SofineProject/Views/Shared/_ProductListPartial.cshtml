@@ -4,14 +4,14 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="product-single-item">
             <div class="product-thumb mb-4">
-                <a href="#" class="product-img">
+                <a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id" class="product-img">
                     <img class="first-image" src="~/assets/img/Product/@product.MainImage" alt="">
                     <img class="second-image" src="~/assets/img/Product/@product.HoverImage" alt="">
                 </a>
             </div>
             <div class="product-content">
                 <div class="product-name">
-                    <h2><a href="">@product.Title</a></h2>
+                    <h2><a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id">@product.Title</a></h2>
                 </div>
                 <div class="product-reviews">
                     <i class="fa-regular fa-star"></i>

@@ -13,14 +13,14 @@ namespace SofineProject.Models
 		public AppUser? AppUser { get; set; }
 
 		[EmailAddress]
-		public string? Email { get; set; }
+		public string Email { get; set; }
 
 		[StringLength(100)]
-		public string? Name { get; set; }
+		public string Name { get; set; }
 
 
 		[StringLength(1000)]
-		public string? Description { get; set; }
+		public string Description { get; set; }
 
 		[Range(0, 5)]
 		public int Star { get; set; }

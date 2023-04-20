@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.DataAccessLayer;
 using SofineProject.Models;
 using SofineProject.ViewModels;
 using SofineProject.ViewModels.ShopViewModels;
 using System;
+using System.Data;
 using System.Globalization;
 
 namespace SofineProject.Controllers
@@ -12,10 +15,12 @@ namespace SofineProject.Controllers
 	public class ShopController : Controller
 	{
 		private readonly AppDbContext _context;
-		public ShopController(AppDbContext context)
-		{
-			_context = context;
-		}
+        private readonly UserManager<AppUser> _userManager;
+        public ShopController(AppDbContext context, UserManager<AppUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
 
 
         public async Task<IActionResult> Index(int? categoryId, int? productTypeId, string sortby = "1", int pageIndex = 1, string filter = "")
@@ -121,5 +126,37 @@ namespace SofineProject.Controllers
 
 			return View(productReviewVM);
 		}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Member")]
+
+        public async Task<IActionResult> AddReview(Review review)
+        {
+            Product product = await _context.Products
+               .Include(p => p.ProductImages.Where(p => p.IsDeleted == false))
+               .Include(p => p.Reviews.Where(p => p.IsDeleted == false))
+               .FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == review.ProductId);
+
+            ProductReviewVM productReviewVM = new ProductReviewVM { Product = product, Review = review };
+
+            if (!ModelState.IsValid) return View("Detail", productReviewVM);
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (product.Reviews != null && product.Reviews.Count() > 0 && product.Reviews.Any(r => r.AppUserId == appUser.Id))
+            {
+                ModelState.AddModelError("Name", "Siz artiq fikir bildirmisiniz!");
+                return View("Detail", productReviewVM);
+            }
+           
+            review.CreatedBy = $"{appUser.Name} {appUser.SurName}";
+            review.CreatedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.Reviews.AddAsync(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Detail", "Shop", new { productId = product.Id });
+
+
+        }
     }
 }

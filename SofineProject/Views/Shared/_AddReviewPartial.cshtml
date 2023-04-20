@@ -1,0 +1,49 @@
+﻿@model Review
+@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+{
+    <form method="post" class="review-form" asp-controller="Shop" asp-action="AddReview">
+        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+        <div class="form-group row">
+            <div class="col">
+                <label asp-for="Name" class="col-form-label"><span class="text-danger">*</span> Your Name</label>
+                <input asp-for="Name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <label asp-for="Email" class="col-form-label"><span class="text-danger">*</span> Your Email</label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <label asp-for="Description" class="col-form-label"><span class="text-danger">*</span> Your Review</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+
+            </div>
+        </div>
+        <div class="rating-star d-flex align-items-center">
+            <span class="title">Rating:</span>
+            <div class="rate">
+                <input type="radio" id="star5" asp-for="Star" value="5" />
+                <label for="star5" title="5">5 stars</label>
+                <input type="radio" id="star4" asp-for="Star" value="4" />
+                <label for="star4" title="4">4 stars</label>
+                <input type="radio" id="star3" asp-for="Star" value="3" />
+                <label for="star3" title="3">3 stars</label>
+                <input type="radio" id="star2" asp-for="Star" value="2" />
+                <label for="star2" title="2">2 stars</label>
+                <input type="radio" id="star1" asp-for="Star" value="1" />
+                <label for="star1" title="1">1 star</label>
+            </div>
+        </div>
+        <div class="buttons my-2">
+            <button class="sqr-btn" type="submit">Add Review</button>
+        </div>
+    </form>
+}
+@section Scripts
+    {
+    @await Html.PartialAsync("_Validation")
+}

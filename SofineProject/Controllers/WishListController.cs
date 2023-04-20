@@ -145,5 +145,41 @@ namespace SofineProject.Controllers
 
             return PartialView("_WishlistMiniPartial", wishListVMs);
         }
+        public async Task<IActionResult> GetWishlistForCart()
+        {
+            string wishlist = HttpContext.Request.Cookies["wishlist"];
+            List<WishlistVM> wishlistVMs = null;
+
+            if (wishlist != null)
+            {
+                wishlistVMs = JsonConvert.DeserializeObject<List<WishlistVM>>(wishlist);
+
+                foreach (WishlistVM wishlistVM in wishlistVMs)
+                {
+                    Product product = _context.Products.FirstOrDefault(p => p.Id == wishlistVM.Id && p.IsDeleted == false);
+
+                    if (product != null)
+                    {
+                        wishlistVM.Title = product.Title;
+                        wishlistVM.Image = product.MainImage;
+
+                        if (product.DiscountedPrice > 0)
+                        {
+                            wishlistVM.Price = product.DiscountedPrice;
+                        }
+                        else
+                        {
+                            wishlistVM.Price = product.Price;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                wishlistVMs = new List<WishlistVM>();
+            }
+
+            return PartialView("_WishlistCartPartial", wishlistVMs);
+        }
     }
 }

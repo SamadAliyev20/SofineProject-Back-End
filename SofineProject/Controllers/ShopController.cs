@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SofineProject.DataAccessLayer;
 using SofineProject.Models;
+using SofineProject.ViewModels;
 using SofineProject.ViewModels.ShopViewModels;
 using System;
 using System.Globalization;
@@ -17,10 +18,10 @@ namespace SofineProject.Controllers
 		}
 
 
-        public async Task<IActionResult> Index(int? categoryId, int? productTypeId, string sortby = "1", string filter = "")
+        public async Task<IActionResult> Index(int? categoryId, int? productTypeId, string sortby = "1", int pageIndex = 1, string filter = "")
         {
         
-            IEnumerable<Product> AllProducts = await _context.Products.Where(p => p.IsDeleted == false).Include(p => p.ProductImages.Where(pi => pi.IsDeleted == false)).ToListAsync();
+            IQueryable<Product> AllProducts =  _context.Products.Where(p => p.IsDeleted == false).Include(p => p.ProductImages.Where(pi => pi.IsDeleted == false));
             IEnumerable<Category> categories = await _context.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             IEnumerable<ProductType> ProductTypes = await _context.ProductTypes.Where(pt => pt.IsDeleted == false).ToListAsync();
             ViewBag.categoryId = categoryId;
@@ -65,7 +66,7 @@ namespace SofineProject.Controllers
 
             ShopVM shopVM = new ShopVM
             {
-                Products = AllProducts,
+                Products = PageNatedList<Product>.Create(AllProducts, pageIndex, 10),
                 Categories = categories,
                 ProductTypes = ProductTypes,
             };

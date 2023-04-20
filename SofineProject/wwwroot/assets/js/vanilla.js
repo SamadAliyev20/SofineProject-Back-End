@@ -139,6 +139,11 @@ $(document).ready(function () {
                     title: 'Məhsul İstəklərdən silindi'
                 })
             }
+            fetch('/Wishlist/GetWishlistForCart/').then(res => {
+                return res.text();
+            }).then(data => {
+                $('.wish-area').html(data)
+            })
         })
     })
     // pricing filter

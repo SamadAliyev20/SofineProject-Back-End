@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WishlistVM>
+<div class="container">
+    <div class="row">
+        <div class="cart-area">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="title text-center">
+                                <th>THUMBNAIL</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Add To Cart</th>
+                                <th>Total</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (WishlistVM wishlistVM in Model)
+                            {
+                                <tr>
+                                    <td class="pro-img">
+                                        <a href="product-details.html">
+                                            <img class="img-fluid" src="~/assets/img/Product/@wishlistVM.Image">
+                                        </a>
+                                    </td>
+                                    <td class="pro-name">@wishlistVM.Title</td>
+                                    <td class="pro-price"><span>$@wishlistVM.Price</span></td>
+                                    <td class="pro-add-to-cart">
+                                        <a style="cursor:pointer" class="addToBasket" data-id="@wishlistVM.Id"><i class="fa-solid fa-basket-shopping"></i></a>
+                                    </td>
+                                    <td class="pro-total"><span>$@(wishlistVM.Count * wishlistVM.Price)</span></td>
+                                    <td class="pro-remove">
+                                       <a style="cursor:pointer" class="delete-wishList"data-productId="@wishlistVM.Id">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

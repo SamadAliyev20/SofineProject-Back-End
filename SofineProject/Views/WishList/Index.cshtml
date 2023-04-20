@@ -1,4 +1,5 @@
-﻿<!-- Start BreadCrumb Area -->
+﻿@model IEnumerable<WishlistVM>
+<!-- Start BreadCrumb Area -->
    <section id="BreadCrumb-Section">
     <div class="container">
       <div class="row">
@@ -7,7 +8,7 @@
                   <nav aria-label="breadcrumb">
                       <h1 class="breadcrumb-title">Wishlist</h1>
                       <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                          <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
                           <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
                       </ul>
                   </nav>
@@ -16,5 +17,11 @@
       </div>
   </div>
    </section>
-    <!-- End BreadCrumb Area --> 
-
+    <!-- End BreadCrumb Area -->
+<!-- Start Cart Section-->
+<section id="Wishlist-Section">
+   <div class="wish-area">
+        @await Html.PartialAsync("_WishlistCartPartial",Model)
+   </div>
+</section>
+<!-- End Cart Section-->

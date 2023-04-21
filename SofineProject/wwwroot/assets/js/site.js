@@ -12,18 +12,63 @@ $(document).ready(function () {
                 $('.modal').on('shown.bs.modal', function (e) {
                     e.preventDefault();
                     $('.product-modal-carousel').slick('setPosition');
-                    $(".addToCart").on('click', function (e) {
+                    $(".addToCard").on('click', function (e) {
                         e.preventDefault();
-                        let productId = $(this).data('id');
+                        let productId = $(this).attr('data-id');
 
                         fetch('/basket/AddBasket?id=' + productId)
                             .then(res => {
                                 return res.text();
-                            }).then(data => {
+                            })
+                            .then(data => {
                                 $('.mini-cart-inner-content').html(data);
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'bottom-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Məhsul Səbətə Əlavə Olundu'
+                                })
                             });
 
                     });
+                    $(".addToWishlist").on('click', function (e) {
+                        e.preventDefault();
+                        let productId = $(this).attr('data-id');
+                        fetch('/Wishlist/AddWishlist?id=' + productId)
+                            .then(res => {
+                                return res.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                $('.wishlist-inner-content').html(data)
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'bottom-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: false,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Məhsul İstəklərə Əlavə Olundu'
+                                })
+                            })
+                    })
 
                 })
                 $('.product-modal-carousel').slick({

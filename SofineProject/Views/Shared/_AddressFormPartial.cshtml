@@ -1,0 +1,39 @@
+﻿@model Address
+<form method="post" asp-controller="account" asp-action="AddAddress">
+	<div class="row d-flex">
+		<div class="col-md-12 mt-30">
+			<input asp-for="IsMain" id="account">
+			<label asp-for="IsMain"></label>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<input asp-for="Country" placeholder="Country">
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<input asp-for="City" placeholder="City">
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<input asp-for="State" placeholder="State">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="single-form">
+				<input asp-for="PostalCode" placeholder="Postal Code">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="single-form">
+				<input asp-for="AddressLine" placeholder="Address Line">
+			</div>
+		</div>
+		<div class="col-md-12 my-2">
+			<div class="single-form">
+				<button type="submit" class="btn btn-outline-dark">Save Change</button>
+			</div>
+		</div>
+	</div>
+</form>

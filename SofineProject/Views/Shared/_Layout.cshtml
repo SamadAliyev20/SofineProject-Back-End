@@ -81,7 +81,7 @@
 										<div class="dropdown-content">
 												@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
 												{
-												<a asp-controller="Account" asp-action="My Account">My Account</a>
+												<a asp-controller="Account" asp-action="Profile">My Account</a>
 												<a asp-controller="Order" asp-action="checkout">CheckOut</a>
 												<a asp-controller="Account" asp-action="Logout">Sign Out</a>
 												}
@@ -341,6 +341,17 @@
 	@RenderSection("Scripts",false);
 	<script src="~/assets/js/site.js"></script>
 	<script src="~/assets/js/vanilla.js"></script>
+	@if (TempData["ToasterMessage"] != null)
+	{
+		<script>
+			Swal.fire({
+				title: '@TempData["ToasterMessage"]',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: false
+			});
+		</script>
+	}
 	<!--=======================Javascript============================-->
 </body>
 

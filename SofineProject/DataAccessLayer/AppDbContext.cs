@@ -17,5 +17,6 @@ namespace SofineProject.DataAccessLayer
         public DbSet<ProductImage> ProductImages { get; set; }
 
 		public DbSet<Review> Reviews { get; set; }
-	}
+        public DbSet<Address> Addresses { get; set; }
+    }
 }

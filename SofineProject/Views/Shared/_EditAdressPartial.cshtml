@@ -1,0 +1,54 @@
+﻿@model Address
+
+<h2>Edit Address</h2>
+
+<form method="post" asp-controller="account" asp-action="EditAddress">
+	<input type="hidden" name="Id" asp-for="@Model.Id" />
+	<div class="row d-flex">
+		<div class="col-md-12 mt-30">
+			<label asp-for="IsMain"></label>
+			<input asp-for="IsMain" id="account">
+			<span asp-validation-for="IsMain" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<label asp-for="Country"></label>
+				<input asp-for="Country" placeholder="Country">
+				<span asp-validation-for="Country" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<label asp-for="City"></label>
+				<input asp-for="City" placeholder="City">
+				<span asp-validation-for="City" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="single-form">
+				<label asp-for="State"></label>
+				<input asp-for="State" placeholder="State">
+				<span asp-validation-for="State" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="single-form">
+				<label asp-for="PostalCode"></label>
+				<input asp-for="PostalCode" placeholder="Postal Code">
+				<span asp-validation-for="PostalCode" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="single-form">
+				<label asp-for="AddressLine"></label>
+				<input asp-for="AddressLine" placeholder="Address Line">
+				<span asp-validation-for="AddressLine" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-12 my-2">
+			<div class="single-form">
+				<button type="submit" class="btn btn-outline-dark">Save Change</button>
+			</div>
+		</div>
+	</div>
+</form>

@@ -130,33 +130,39 @@ namespace SofineProject.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Member")]
 
-        public async Task<IActionResult> AddReview(Review review)
-        {
-            Product product = await _context.Products
-               .Include(p => p.ProductImages.Where(p => p.IsDeleted == false))
-               .Include(p => p.Reviews.Where(p => p.IsDeleted == false))
-               .FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == review.ProductId);
+		public async Task<IActionResult> AddReview(Review review)
+		{
+			Product product = await _context.Products
+				.Include(p => p.ProductImages.Where(p => p.IsDeleted == false))
+				.Include(p => p.Reviews.Where(p => p.IsDeleted == false))
+				.FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == review.ProductId);
 
-            ProductReviewVM productReviewVM = new ProductReviewVM { Product = product, Review = review };
+			ProductReviewVM productReviewVM = new ProductReviewVM { Product = product, Review = review };
 
-            if (!ModelState.IsValid) return View("Detail", productReviewVM);
-            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+			if (!ModelState.IsValid) return View("Detail", productReviewVM);
 
-            if (product.Reviews != null && product.Reviews.Count() > 0 && product.Reviews.Any(r => r.AppUserId == appUser.Id))
-            {
-                ModelState.AddModelError("Name", "Siz artiq fikir bildirmisiniz!");
-                return View("Detail", productReviewVM);
-            }
-           
-            review.CreatedBy = $"{appUser.Name} {appUser.SurName}";
-            review.CreatedAt = DateTime.UtcNow.AddHours(4);
+			if (!User.Identity.IsAuthenticated)
+			{
+				ModelState.AddModelError("Name", "You need to be logged in to add a review.");
+				return RedirectToAction("Detail", "Shop", productReviewVM);
+			}
 
-            await _context.Reviews.AddAsync(review);
-            await _context.SaveChangesAsync();
+			AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            return RedirectToAction("Detail", "Shop", new { productId = product.Id });
+			if (product.Reviews != null && product.Reviews.Count() > 0 && product.Reviews.Any(r => r.AppUserId == appUser.Id))
+			{
+				ModelState.AddModelError("Name", "You have already submitted a review for this product!");
+				return View("Detail", productReviewVM);
+			}
 
+			review.CreatedBy = $"{appUser.Name} {appUser.SurName}";
+			review.CreatedAt = DateTime.UtcNow.AddHours(4);
+			review.AppUserId = appUser.Id;
 
-        }
-    }
+			await _context.Reviews.AddAsync(review);
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction("Detail", "Shop", new { productId = product.Id });
+		}
+	}
 }

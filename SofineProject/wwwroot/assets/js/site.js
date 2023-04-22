@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('select').niceSelect();
+    $('.select').niceSelect();
     $(".productQuickModal").on('click', function (e) {
         e.preventDefault();
         let url = $(this).attr('href');

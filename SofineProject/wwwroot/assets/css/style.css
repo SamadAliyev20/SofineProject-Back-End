@@ -1925,3 +1925,6 @@ header {
         transform: translateY(-8px);
     }
 }
+.nice-select  c{
+    display:none
+}

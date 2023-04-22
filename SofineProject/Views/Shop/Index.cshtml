@@ -161,7 +161,7 @@
                                 <form method="post" asp-controller="Shop" asp-action="Index" id="my-form">
 										<div class="product-short">
 											<p>Sort By:</p>
-											<select class="nice-select" asp-for="SortBy" asp-route-filter="@Model.Filter" asp-route-sortby="@Model.SortBy" onchange="submitForm()" form="my-form">
+											<select class="select" asp-for="SortBy" asp-route-filter="@Model.Filter" asp-route-sortby="@Model.SortBy" onchange="submitForm()" form="my-form">
 												<option value="1">Name (A - Z)</option>
 												<option value="2">Name (Z - A)</option>
 												<option value="3">Price (Low &gt; High)</option>

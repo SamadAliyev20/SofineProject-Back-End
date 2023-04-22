@@ -161,8 +161,8 @@ namespace SofineProject.Controllers
 
 			await _context.Reviews.AddAsync(review);
 			await _context.SaveChangesAsync();
-
-			return RedirectToAction("Detail", "Shop", new { productId = product.Id });
+            TempData["Tab"] = "review";
+            return RedirectToAction("Detail", "Shop", new { productId = product.Id });
 		}
 	}
 }

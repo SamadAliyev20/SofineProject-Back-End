@@ -12,5 +12,6 @@ namespace SofineProject.Models
 		public IEnumerable<Review>? Reviews { get; set; }
 
         public IEnumerable<Address>? Addresses { get; set; }
+        public List<Basket>? Baskets { get; set; }
     }
 }

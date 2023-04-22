@@ -12,10 +12,12 @@ namespace SofineProject.Controllers
 	public class BasketController : Controller
 	{
         private readonly AppDbContext _context;
-		public BasketController(AppDbContext context)
-		{
-			_context= context;
-		}
+        private readonly UserManager<AppUser> _userManager;
+        public BasketController(AppDbContext context, UserManager<AppUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
         public IActionResult Index()
         {
             string basket = HttpContext.Request.Cookies["basket"];
@@ -83,6 +85,28 @@ namespace SofineProject.Controllers
                 {
                     basketVMs.Add(new BasketVM { Id = (int)id, Count = 1 });
                 }
+            }
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users
+                    .Include(u => u.Baskets.Where(b => b.IsDeleted == false))
+                    .FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
+
+                if (appUser.Baskets.Any(b => b.ProductId == id))
+                {
+                    appUser.Baskets.FirstOrDefault(b => b.ProductId == id).Count
+                    = basketVMs.FirstOrDefault(b => b.Id == id).Count;
+                }
+                else
+                {
+                    Basket dbbasket = new Basket
+                    {
+                        ProductId = id,
+                        Count = basketVMs.FirstOrDefault(b => b.Id == id).Count
+                    };
+                    appUser.Baskets.Add(dbbasket);
+                }
+                await _context.SaveChangesAsync();
             }
             basket = JsonConvert.SerializeObject(basketVMs);
 

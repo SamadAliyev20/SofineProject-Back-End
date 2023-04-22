@@ -2,6 +2,8 @@
 @{
 	ViewData["Title"] = "Index";
 }
+
+}
 <!-- Start Header-Slider Section -->
 <section id="header-slider">
 	<div class="hero-slider">
@@ -87,6 +89,8 @@
 			<div class="product-slider d-flex justify-content-between flex-wrap">
 				@foreach (Product product in Model.Products.Take(10))
 				{
+					var reviews = product?.Reviews;
+					double averageStars = reviews != null && reviews.Any() ? reviews.Average(r => r.Star) : 0;
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 						<div class="product-single-item">
 							<div class="product-thumb mb-4">
@@ -100,11 +104,11 @@
 									<h2><a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id">@product.Title</a></h2>
 								</div>
 								<div class="product-reviews">
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
+									@for (int i = 0; i < 5; i++)
+									{
+										<i class="good fa-@(i < averageStars ? "solid" : "regular") fa-star"></i>
+									}
+									(@product.Reviews?.Count())
 								</div>
 								<div class="price-box">
 									@if (product.DiscountedPrice > 0)
@@ -291,6 +295,8 @@
 			<div class="product-slider d-flex justify-content-between flex-wrap">
 				@foreach (Product product in Model.LastProducts.Skip(2).Take(10))
 				{
+					var reviews = product?.Reviews;
+					double averageStars = reviews != null && reviews.Any() ? reviews.Average(r => r.Star) : 0;
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 						<div class="product-single-item">
 							<div class="product-thumb mb-4">
@@ -304,11 +310,11 @@
 									<h2><a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id">@product.Title</a></h2>
 								</div>
 								<div class="product-reviews">
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
-									<i class="fa-regular fa-star"></i>
+									@for (int i = 0; i < 5; i++)
+									{
+										<i class="good fa-@(i < averageStars ? "solid" : "regular") fa-star"></i>
+									}
+									(@product.Reviews?.Count())
 								</div>
 								<div class="price-box">
 									@if (product.DiscountedPrice > 0)

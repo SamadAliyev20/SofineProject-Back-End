@@ -1,4 +1,8 @@
 ﻿@model ProductReviewVM
+@{
+    var reviews = Model.Product.Reviews;
+    double averageStars = reviews != null && reviews.Any() ? reviews.Average(r => r.Star) : 0;
+}
 <!-- Start BreadCrumb Area -->
    <section id="BreadCrumb-Section">
     <div class="container">
@@ -40,10 +44,10 @@
                     <div class="product-reviews">
                         <span class="stars">
 
-                                @for (int i = 1; i <= 5; i++)
-                                {
-                                <i class="fas fa-star good"></i>
-                               }
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <i class="good fa-@(i < averageStars ? "solid" : "regular") fa-star"></i>
+                            }
                             
                         </span>
                         <span class="total-reviews">

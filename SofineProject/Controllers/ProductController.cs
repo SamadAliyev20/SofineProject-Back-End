@@ -19,7 +19,7 @@ namespace SofineProject.Controllers
             {
                 return BadRequest();
             }
-            Product product = await _context.Products.Include(p => p.ProductImages).FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == id);
+            Product product = await _context.Products.Include(p => p.ProductImages).Include(p=>p.Reviews).FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == id);
 
             if (product == null) return NotFound();
 

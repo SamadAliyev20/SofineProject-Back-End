@@ -32,7 +32,7 @@ namespace SofineProject.Models
         [NotMapped]
         public IEnumerable<IFormFile>? Files { get; set; }
 
-        [NotMapped]
+		[NotMapped]
         public IFormFile? MainFile { get; set; }
 
         [NotMapped]

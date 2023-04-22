@@ -1,48 +1,50 @@
 ﻿@model IEnumerable<Product>
 @foreach (Product product in Model)
 {
-    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-        <div class="product-single-item">
-            <div class="product-thumb mb-4">
-                <a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id" class="product-img">
-                    <img class="first-image" src="~/assets/img/Product/@product.MainImage" alt="">
-                    <img class="second-image" src="~/assets/img/Product/@product.HoverImage" alt="">
-                </a>
-            </div>
-            <div class="product-content">
-                <div class="product-name">
-                    <h2><a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id">@product.Title</a></h2>
-                </div>
-                <div class="product-reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <div class="price-box">
-                    @if (product.DiscountedPrice > 0)
-                    {
-                        <span class="price-regular">$@product.DiscountedPrice</span>
-                        <span class="price-old"><del>$@product.Price</del></span>
-                    }
-                </div>
-                <div class="product-overlay-top-left">
-                    @if (product.DiscountedPrice > 0)
-                    {
-                        <span class="sale-price">@Math.Ceiling((((product.Price - product.DiscountedPrice) / product.Price) * 100))%</span>
-                    }
-                </div>
-                <div class="heart-button">
-                    <a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i style="color: #ff0000;" class="fa-regular fa-heart"></i></a>
-                </div>
-                <div class="group-button">
-                    <a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
-                        <i class="fa-regular fa-eye"></i>
-                    </a>
-                    <a class="addToBasket" data-id="@product.Id"><i class="fa-solid fa-basket-shopping"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+	var reviews = product?.Reviews;
+	double averageStars = reviews != null && reviews.Any() ? reviews.Average(r => r.Star) : 0;
+	<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+		<div class="product-single-item">
+			<div class="product-thumb mb-4">
+				<a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id" class="product-img">
+					<img class="first-image" src="~/assets/img/Product/@product.MainImage" alt="">
+					<img class="second-image" src="~/assets/img/Product/@product.HoverImage" alt="">
+				</a>
+			</div>
+			<div class="product-content">
+				<div class="product-name">
+					<h2><a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id">@product.Title</a></h2>
+				</div>
+				<div class="product-reviews">
+					@for (int i = 0; i < 5; i++)
+					{
+						<i class="good fa-@(i < averageStars ? "solid" : "regular") fa-star"></i>
+					}
+					(@product.Reviews?.Count())
+				</div>
+				<div class="price-box">
+					@if (product.DiscountedPrice > 0)
+					{
+						<span class="price-regular">$@product.DiscountedPrice</span>
+						<span class="price-old"><del>$@product.Price</del></span>
+					}
+				</div>
+				<div class="product-overlay-top-left">
+					@if (product.DiscountedPrice > 0)
+					{
+						<span class="sale-price">@Math.Ceiling((((product.Price - product.DiscountedPrice) / product.Price) * 100))%</span>
+					}
+				</div>
+				<div class="heart-button">
+					<a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i style="color: #ff0000;" class="fa-regular fa-heart"></i></a>
+				</div>
+				<div class="group-button">
+					<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
+						<i class="fa-regular fa-eye"></i>
+					</a>
+					<a class="addToBasket" data-id="@product.Id"><i class="fa-solid fa-basket-shopping"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
 }

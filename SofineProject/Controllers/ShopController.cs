@@ -26,7 +26,7 @@ namespace SofineProject.Controllers
         public async Task<IActionResult> Index(int? categoryId, int? productTypeId, string sortby = "1", int pageIndex = 1, string filter = "")
         {
         
-            IQueryable<Product> AllProducts =  _context.Products.Where(p => p.IsDeleted == false).Include(p => p.ProductImages.Where(pi => pi.IsDeleted == false));
+            IQueryable<Product> AllProducts =  _context.Products.Where(p => p.IsDeleted == false).Include(p => p.ProductImages.Where(pi => pi.IsDeleted == false)).Include(P=>P.Reviews);
             IEnumerable<Category> categories = await _context.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             IEnumerable<ProductType> ProductTypes = await _context.ProductTypes.Where(pt => pt.IsDeleted == false).ToListAsync();
             ViewBag.categoryId = categoryId;

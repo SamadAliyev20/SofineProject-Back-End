@@ -33,13 +33,16 @@
         }
     </ul>
 </div>
-<div class="bottom-group">
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="bottom-group">
     <div class="subtotal">
         <span class="text">Total</span>
         <span class="pro-price">$@Model.Sum(b=>b.Count *b.Price)</span>
     </div>
-    <div class="cms-group-button">
-        <a href="#" class="cms-button-check">Checkout</a>
-        <a asp-controller="Basket" asp-action="Index" class="cms-cart">View Cart</a>
+        <div class="cms-group-button">
+            <a asp-controller="Order" asp-action="checkout" class="cms-button-check">Checkout</a>
+            <a asp-controller="Basket" asp-action="Index" class="cms-cart">View Cart</a>
+        </div>
     </div>
-</div>
+}

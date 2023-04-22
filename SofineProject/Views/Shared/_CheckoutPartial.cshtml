@@ -1,0 +1,42 @@
+﻿@model Order
+<form method="post" id="checkoutForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="single-input-item">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="input-box" placeholder="Name" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="single-input-item">
+                <label asp-for="SurName">Last Name</label>
+                <input asp-for="SurName" class="input-box" placeholder="Last Name" />
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="input-box" placeholder="Email" />
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" class="input-box" placeholder="Phone" />
+    </div>
+    <div class="single-input-item">
+        <label asp-for="City">City</label>
+        <input asp-for="City" class="input-box" placeholder="City" />
+    </div>
+    <div class="single-input-item">
+        <label asp-for="AddressLine">AddressLine</label>
+        <input asp-for="AddressLine" class="input-box" placeholder="AddressLine" />
+    </div>
+    <div class="single-input-item">
+        <label asp-for="State">State</label>
+        <input asp-for="State" class="input-box" placeholder="State" />
+    </div>
+    <div class="single-input-item">
+        <label asp-for="PostalCode">Postal Code</label>
+        <input asp-for="PostalCode" class="input-box" placeholder="Postal Code" />
+    </div>
+
+</form>

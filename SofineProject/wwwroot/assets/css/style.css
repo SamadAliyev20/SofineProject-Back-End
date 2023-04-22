@@ -1928,3 +1928,58 @@ header {
 .nice-select  c{
     display:none
 }
+.checkout-title {
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+#Checkout-Section {
+    padding: 80px 0;
+}
+
+.order-summary-table {
+    background-color: #f7f7f7;
+    margin-top: 34px;
+}
+
+.checkout-total {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.order-btn-area {
+    background-color: #f7f7f7;
+    padding: 10px 20px 30px;
+}
+
+.btn-order {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    color: #f1f1f1;
+    outline: none;
+    box-shadow: none;
+    transition: 0.42s ease;
+    display: block;
+    padding: 14px 25px;
+    background-color: #333333;
+    text-transform: uppercase;
+}
+
+    .btn-order:hover {
+        color: #fff;
+        background-color: #d93939;
+    }
+.table tr {
+    cursor: pointer;
+}
+
+.hiddenRow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}

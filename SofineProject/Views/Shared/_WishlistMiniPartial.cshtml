@@ -22,10 +22,13 @@
         }
     </ul>
 </div>
-<div class="bottom-group">
-    <div class="subtotal">
+@if(Model != null && Model.Count() > 0)
+{
+    <div class="bottom-group">
+        <div class="subtotal">
+        </div>
+        <div class="cms-group-button">
+            <a asp-controller="Wishlist" asp-action="Index" class="cms-button-check">View wishlist</a>
+        </div>
     </div>
-    <div class="cms-group-button">
-        <a asp-controller="Wishlist" asp-action="Index" class="cms-button-check">View wishlist</a>
-    </div>
-</div>
+}

@@ -82,7 +82,7 @@
 												@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
 												{
 												<a asp-controller="Account" asp-action="Profile">My Account</a>
-												<a asp-controller="Order" asp-action="checkout">CheckOut</a>
+												<a asp-controller="Order" asp-action="checkout">Checkout</a>
 												<a asp-controller="Account" asp-action="Logout">Sign Out</a>
 												}
 												else

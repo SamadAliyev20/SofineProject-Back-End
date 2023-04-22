@@ -107,12 +107,16 @@ namespace SofineProject.Controllers
         public async Task<ActionResult> Profile(Address? address)
         {
             AppUser appUser = await _userManager.Users
+                .Include(u => u.Orders.Where(a => a.IsDeleted == false))
+                .ThenInclude(u => u.OrderItems.Where(o => o.IsDeleted == false))
+                .ThenInclude(oi => oi.Product)
                 .Include(u => u.Addresses.Where(a => a.IsDeleted == false))
                 .FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
 
             ProfileVM profileVM = new ProfileVM
             {
                 Addresses = appUser.Addresses,
+                Orders = appUser.Orders,
                 Name = appUser.Name,
                 SurName = appUser.SurName,
                 UserName = appUser.UserName,

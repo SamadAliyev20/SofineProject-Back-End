@@ -27,6 +27,7 @@ namespace SofineProject.ViewModels.AccountViewModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public IEnumerable<Address>? Addresses { get; set; }
+        public IEnumerable<Order>? Orders { get; set; }
         public AppUser? AppUser { get; set; }
         public Address? EditAddress { get; set; }
     }

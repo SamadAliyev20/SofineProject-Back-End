@@ -1,0 +1,79 @@
+﻿ @model OrderVM
+ <!-- Start BreadCrumb Area -->
+   <section id="BreadCrumb-Section">
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="breadcrumb-wrap text-center">
+                  <nav aria-label="breadcrumb">
+                      <h1 class="breadcrumb-title">Checkout</h1>
+                      <ul class="breadcrumb">
+                          <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+   </section>
+    <!-- End BreadCrumb Area -->
+<!-- Start Checkout Section-->
+<section id="Checkout-Section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="checkout-billing-details">
+                    <div class="checkout-title">
+                        Billing Details
+                    </div>
+                    <div class="billing-form">
+                        @await Html.PartialAsync("_CheckoutPartial",Model.Order)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="order-summary-details">
+                    <div class="checkout-title">
+                        Your Order
+                    </div>
+                    <div class="order-content">
+                        <div class="order-summary-table table-responsive text-center">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Products</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   @foreach (BasketVM basketVM in Model.BasketVMs)
+                                    {
+                                         <tr>
+                                        <td class="check-name"><a>@basketVM.Title</a> <strong>x @basketVM.Count</strong></td>
+                                            <td class="check-name"><span>$@(basketVM.Price * basketVM.Count)</span></td>
+                                    </tr>
+                                    }
+                                    
+                                </tbody>
+                                <tfoot>
+                                <td> Total Price</td>
+                                <td class="checkout-total"><span>$@Model.BasketVMs.Sum(b=>b.Count *b.Price)</span></td>
+                                </tfoot>
+                            </table>
+                            @if (Model.BasketVMs != null && Model.BasketVMs.Count() > 0)
+                            {
+                                <div class="order-btn-area">
+                                <button type="submit" form="checkoutForm" class="btn-order">
+                                    Place Order
+                                </button>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Cart Section-->

@@ -13,5 +13,6 @@ namespace SofineProject.Models
 
         public IEnumerable<Address>? Addresses { get; set; }
         public List<Basket>? Baskets { get; set; }
+        public IEnumerable<Order>? Orders { get; set; }
     }
 }

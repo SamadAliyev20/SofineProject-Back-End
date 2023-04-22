@@ -1,206 +1,216 @@
-﻿@model ProfileVM 
+﻿@model ProfileVM
 <!-- Start BreadCrumb Area -->
-   <section id="BreadCrumb-Section">
-    <div class="container">
-      <div class="row">
-          <div class="col-12">
-              <div class="breadcrumb-wrap text-center">
-                  <nav aria-label="breadcrumb">
-                      <h1 class="breadcrumb-title">My Account</h1>
-                      <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">My Account</li>
-                      </ul>
-                  </nav>
-              </div>
-          </div>
-      </div>
-  </div>
-   </section>
-    <!-- End BreadCrumb Area -->
-    <!-- Start My-Account Section-->
+<section id="BreadCrumb-Section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="breadcrumb-wrap text-center">
+					<nav aria-label="breadcrumb">
+						<h1 class="breadcrumb-title">My Account</h1>
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">My Account</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End BreadCrumb Area -->
+<!-- Start My-Account Section-->
 <section id="My-Account-Section">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-3 col-md-4">
-                <div class="my-account-menu mt-30">
-                    <ul class="nav account-menu-list flex-column nav-pills" id="pills-tab" role="tablist">
-                        <li>
-                            <a class="@(TempData["Tab"]==null ? "active" : "") id="pills-dashboard-tab" data-bs-toggle="pill" href="#pills-dashboard" role="tab" aria-controls="pills-dashboard" aria-selected="@(TempData["Tab"]==null ? "true" : "false")"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a class="@(TempData["Tab"]?.ToString()=="orders" ? "active" : "")" id="pills-order-tab" data-bs-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="@(TempData["Tab"]?.ToString()=="orders" ? "true" : "false")"><i class="fa-solid fa-cart-shopping"></i> Order</a>
-                        </li>
-                        <li>
-                            <a class="@(TempData["Tab"]?.ToString()=="address" ? "active" : "")" id="pills-address-tab" data-bs-toggle="pill" href="#pills-address" role="tab" aria-controls="pills-address" aria-selected="@(TempData["Tab"]?.ToString()=="address" ? "true" : "false")"><i class="fa-regular fa-map"></i> Address</a>
-                        </li>
-                        <li>
-                            <a class="@(TempData["Tab"]?.ToString()=="account" ? "active" : "")" id="pills-account-tab" data-bs-toggle="pill" href="#pills-account" role="tab" aria-controls="pills-account" aria-selected="@(TempData["Tab"]?.ToString()=="account" ? "true" : "false")"><i class="far fa-user"></i> Account Details</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-8 col-md-8">
-                <div class="tab-content my-account-tab mt-30" id="pills-tabContent">
-                    <div class="tab-pane fade@(TempData["Tab"]?.ToString()==null ? "show active" : "")" id="pills-dashboard" role="tabpanel" aria-labelledby="pills-dashboard-tab">
-                        <div class="my-account-dashboard account-wrapper">
-                            <h4 class="account-title">Dashboard</h4>
-                            <div class="welcome-dashboard">
-                                <p>Hello, <strong class="fw-bold">@User.Identity.Name</strong> (If Not <strong class="fw-bold">@User.Identity.Name</strong> <a asp-controller="Account" asp-action="LogOut">Logout</a> )</p>
-                            </div>
-                            <p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade@(TempData["Tab"]?.ToString()=="address" ? "show active" : "")" id="pills-address" role="tabpanel" aria-labelledby="pills-address-tab">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-md-4">
+				<div class="my-account-menu mt-30">
+					<ul class="nav account-menu-list flex-column nav-pills" id="pills-tab" role="tablist">
+						<li>
+							<a class="@(TempData["Tab"]==null ? "active" : "") id="pills-dashboard-tab" data-bs-toggle="pill" href="#pills-dashboard" role="tab" aria-controls="pills-dashboard" aria-selected="@(TempData["Tab"]==null ? "true" : "false")"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+						</li>
+						<li>
+							<a class="@(TempData["Tab"]?.ToString()=="orders" ? "active" : "")" id="pills-order-tab" data-bs-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="@(TempData["Tab"]?.ToString()=="orders" ? "true" : "false")"><i class="fa-solid fa-cart-shopping"></i> Order</a>
+						</li>
+						<li>
+							<a class="@(TempData["Tab"]?.ToString()=="address" ? "active" : "")" id="pills-address-tab" data-bs-toggle="pill" href="#pills-address" role="tab" aria-controls="pills-address" aria-selected="@(TempData["Tab"]?.ToString()=="address" ? "true" : "false")"><i class="fa-regular fa-map"></i> Address</a>
+						</li>
+						<li>
+							<a class="@(TempData["Tab"]?.ToString()=="account" ? "active" : "")" id="pills-account-tab" data-bs-toggle="pill" href="#pills-account" role="tab" aria-controls="pills-account" aria-selected="@(TempData["Tab"]?.ToString()=="account" ? "true" : "false")"><i class="far fa-user"></i> Account Details</a>
+						</li>
+						<li>
+							<a asp-controller="Account" asp-action="Logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xl-8 col-md-8">
+				<div class="tab-content my-account-tab mt-30" id="pills-tabContent">
+					<div class="tab-pane fade@(TempData["Tab"]?.ToString()==null ? "show active" : "")" id="pills-dashboard" role="tabpanel" aria-labelledby="pills-dashboard-tab">
+						<div class="my-account-dashboard account-wrapper">
+							<h4 class="account-title">Dashboard</h4>
+							<div class="welcome-dashboard">
+								<p>Hello, <strong class="fw-bold">@User.Identity.Name</strong> (If Not <strong class="fw-bold">@User.Identity.Name</strong> <a asp-controller="Account" asp-action="LogOut">Logout</a> )</p>
+							</div>
+							<p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
+						</div>
+					</div>
+					<div class="tab-pane fade@(TempData["Tab"]?.ToString()=="address" ? "show active" : "")" id="pills-address" role="tabpanel" aria-labelledby="pills-address-tab">
 
-                        @if (Model.EditAddress?.Id == null || Model.EditAddress.Id == 0)
-                        {
-                            <div class="my-account-address account-wrapper">
-                                <h4 class="account-title">Your Address</h4>
-                                <a class="edit-btn addAddress"><i class="far fa-edit"></i> Add Address</a>
-                                <div class="addressForm d-none">
-                                    @await Html.PartialAsync("_AddressFormPartial",new Address())
-                                </div>
-                                <div class="addressContainer row">
-                                    @if (Model.Addresses != null && Model.Addresses.Count() > 0)
-                                    {
-                                        foreach (Address address in Model.Addresses)
-                                        {
-                                            <div class="account-address mt-30 col-lg-3">
-                                                <h6 class="name">@($"{address.Country} {address.City}")</h6>
-                                                <p>@address.AddressLine</p>
-                                                <p>Postal Code:@address.PostalCode</p>
-                                                <a class="edit-btn" asp-controller="account" asp-action="EditAddress" asp-route-id="@address.Id"><i class="far fa-edit"></i> Edit Address</a>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div style="" class="my-account-address account-wrapper addressForm">
-                                @await Html.PartialAsync("_EditAdressPartial",Model.EditAddress)
-                            </div>
-                        }
-                    </div>
-                    <div class="tab-pane fade@(TempData["Tab"]?.ToString()=="orders" ? "show active" : "")" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
-                        <div class="my-account-order account-wrapper">
-                            <h4 class="account-title">Orders</h4>
-                            <div class="account-table text-center mt-30 table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="no">No</th>
-                                            <th class="name">Name</th>
-                                            <th class="date">Date</th>
-                                            <th class="status">Status</th>
-                                            <th class="total">Total</th>
-                                            <th class="action">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mostarizing Oil</td>
-                                            <td>Aug 22, 2020</td>
-                                            <td>Pending</td>
-                                            <td>$100</td>
-                                            <td><a href="#">View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Katopeno Altuni</td>
-                                            <td>July 22, 2020</td>
-                                            <td>Approved</td>
-                                            <td>$45</td>
-                                            <td><a href="#">View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Murikhete Paris</td>
-                                            <td>June 22, 2020</td>
-                                            <td>On Hold</td>
-                                            <td>$99</td>
-                                            <td><a href="#">View</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade@(TempData["Tab"]?.ToString()=="account" ? "show active" : "")" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
-                        <div class="my-account-details account-wrapper">
-                            <h4 class="account-title">Account Details</h4>
-                            <div class="account-details">
-                                    <form  method="post">
-                                    <div asp-validation-summary="ModelOnly" class="text text-danger"></div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="single-form">
-                                                <input asp-for="Name" placeholder="First Name">
-                                                <span class="text text-danger" asp-validation-for="Name"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form">
-                                                <input asp-for="SurName" placeholder="Last Name">
-                                                <span class="text text-danger" asp-validation-for="SurName"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form">
-                                                <input asp-for="UserName" placeholder="User Name">
-                                                <span class="text text-danger" asp-validation-for="UserName"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form">
-                                                <input asp-for="Email" placeholder="Email address">
-                                                <span class="text text-danger" asp-validation-for="Email"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form">
-                                                <h5 class="title">Password change</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form">
-                                                <input asp-for="OldPassword" placeholder="Current Password">
-                                                <span class="text text-danger" asp-validation-for="OldPassword"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form">
-                                                <input asp-for="Password" placeholder="New Password">
-                                                <span class="text text-danger" asp-validation-for="Password"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form">
-                                                <input asp-for="ConfirmPassword" placeholder="Confirm Password">
-                                                <span class="text text-danger" asp-validation-for="ConfirmPassword"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form">
-                                                <button class="edit-btn mt-2">Save Change</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						@if (Model.EditAddress?.Id == null || Model.EditAddress.Id == 0)
+						{
+							<div class="my-account-address account-wrapper">
+								<h4 class="account-title">Your Address</h4>
+								<a class="edit-btn addAddress"><i class="far fa-edit"></i> Add Address</a>
+								<div class="addressForm d-none">
+									@await Html.PartialAsync("_AddressFormPartial",new Address())
+								</div>
+								<div class="addressContainer row">
+									@if (Model.Addresses != null && Model.Addresses.Count() > 0)
+									{
+										foreach (Address address in Model.Addresses)
+										{
+											<div class="account-address mt-30 col-lg-3">
+												<h6 class="name">@($"{address.Country} {address.City}")</h6>
+												<p>@address.AddressLine</p>
+												<p>Postal Code:@address.PostalCode</p>
+												<a class="edit-btn" asp-controller="account" asp-action="EditAddress" asp-route-id="@address.Id"><i class="far fa-edit"></i> Edit Address</a>
+											</div>
+										}
+									}
+								</div>
+							</div>
+						}
+						else
+						{
+							<div style="" class="my-account-address account-wrapper addressForm">
+								@await Html.PartialAsync("_EditAdressPartial",Model.EditAddress)
+							</div>
+						}
+					</div>
+					<div class="tab-pane fade@(TempData["Tab"]?.ToString()=="orders" ? "show active" : "")" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
+						<div class="my-account-order account-wrapper">
+							<h4 class="account-title">Orders</h4>
+							<div class="account-table text-center mt-30 table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">No</th>
+											<th scope="col">Date</th>
+											<th scope="col">Total</th>
+											<th scope="col">Status</th>
+											<th scope="col">Comment</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (Order order in Model.Orders)
+										{
+											<tr>
+												<th scope="row" data-bs-toggle="collapse" data-bs-target="#demo@(order.Id)" class="accordion-toggle">@order.No</th>
+												<td>@order.CreatedAt?.ToString("dd MMM yyyy")</td>
+												<td class="text-success">@order.OrderItems.Sum(o => (o.Price * o.Count))</td>
+												<td>@order.Status</td>
+												<td>@order.Comment</td>
+											</tr>
+											<tr>
+												<td colspan="6" class="hiddenRow">
+													<div class="accordion-collapse collapse" id="demo@(order.Id)">
+														<table class="table">
+															<thead>
+																<tr>
+																	<th scope="col">Name</th>
+																	<th scope="col">Count</th>
+																	<th scope="col">Price</th>
+																	<th scope="col">Total</th>
+																</tr>
+															</thead>
+															<tbody>
+																@foreach (OrderItem orderItem in order.OrderItems)
+																{
+																	<tr>
+																		<td>@orderItem.Product.Title</td>
+																		<td>@orderItem.Count</td>
+																		<td>@orderItem.Price</td>
+																		<td class="text-success">$@(orderItem.Price * orderItem.Count)</td>
+																	</tr>
+																}
+															</tbody>
+														</table>
+													</div>
+												</td>
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade@(TempData["Tab"]?.ToString()=="account" ? "show active" : "")" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
+						<div class="my-account-details account-wrapper">
+							<h4 class="account-title">Account Details</h4>
+							<div class="account-details">
+								<form method="post">
+									<div asp-validation-summary="ModelOnly" class="text text-danger"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="single-form">
+												<input asp-for="Name" placeholder="First Name">
+												<span class="text text-danger" asp-validation-for="Name"></span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="single-form">
+												<input asp-for="SurName" placeholder="Last Name">
+												<span class="text text-danger" asp-validation-for="SurName"></span>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="single-form">
+												<input asp-for="UserName" placeholder="User Name">
+												<span class="text text-danger" asp-validation-for="UserName"></span>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="single-form">
+												<input asp-for="Email" placeholder="Email address">
+												<span class="text text-danger" asp-validation-for="Email"></span>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="single-form">
+												<h5 class="title">Password change</h5>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="single-form">
+												<input asp-for="OldPassword" placeholder="Current Password">
+												<span class="text text-danger" asp-validation-for="OldPassword"></span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="single-form">
+												<input asp-for="Password" placeholder="New Password">
+												<span class="text text-danger" asp-validation-for="Password"></span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="single-form">
+												<input asp-for="ConfirmPassword" placeholder="Confirm Password">
+												<span class="text text-danger" asp-validation-for="ConfirmPassword"></span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="single-form">
+												<button class="edit-btn mt-2">Save Change</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- End My-Account Section-->
-
-

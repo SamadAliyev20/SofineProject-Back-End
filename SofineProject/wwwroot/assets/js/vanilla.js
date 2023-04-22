@@ -1,5 +1,4 @@
 $(document).ready(function () {  
-    // product quantity
     $('.add').click(function () {
         if ($(this).prev().val()) {
             $(this).prev().val(+$(this).prev().val() + 1);
@@ -48,8 +47,24 @@ $(document).ready(function () {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'Məhsul Səbətə Əlavə Olundu'
+                    title: 'Product Added to Cart'
                 })
+                fetch('basket/GetBasketCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.count').text(data);
+                    });
+                $('.add').click(function () {
+                    if ($(this).prev().val()) {
+                        $(this).prev().val(+$(this).prev().val() + 1);
+                    }
+                });
+                $('.sub').click(function () {
+                    if ($(this).next().val() > 1) {
+                        if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+                    }
+                });
             })
     })
     $(document).on('click', '.product-delete', function (e) {
@@ -74,7 +89,7 @@ $(document).ready(function () {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'Məhsul Səbətdən Silindi',
+                    title: 'Product Removed from Cart',
                     customClass: {
                         container: 'my-sweet-alert'
                     }
@@ -84,6 +99,22 @@ $(document).ready(function () {
                 }).then(data => {
                     $('.cart-section').html(data)
                 })
+                fetch('basket/GetBasketCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.count').text(data);
+                    });
+                $('.add').click(function () {
+                    if ($(this).prev().val()) {
+                        $(this).prev().val(+$(this).prev().val() + 1);
+                    }
+                });
+                $('.sub').click(function () {
+                    if ($(this).next().val() > 1) {
+                        if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+                    }
+                });
             }
         })
     })
@@ -110,8 +141,24 @@ $(document).ready(function () {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'Məhsul Səbətə Əlavə Olundu'
+                    title: 'Product Added to Cart'
                 })
+                fetch('basket/GetBasketCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.count').text(data);
+                    });
+                $('.add').click(function () {
+                    if ($(this).prev().val()) {
+                        $(this).prev().val(+$(this).prev().val() + 1);
+                    }
+                });
+                $('.sub').click(function () {
+                    if ($(this).next().val() > 1) {
+                        if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+                    }
+                });
             });
 
     });
@@ -138,8 +185,14 @@ $(document).ready(function () {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'Məhsul İstəklərə Əlavə Olundu'
+                    title: 'Product Added to WishList'
                 })
+                fetch('/Wishlist/GetWishlistCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.wish-count').text(data);
+                    });
             })
     })
     $(document).on('click', '.delete-wishList', function (e) {
@@ -169,8 +222,14 @@ $(document).ready(function () {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'Məhsul İstəklərdən silindi'
+                    title: 'Product Removed from WishList'
                 })
+                fetch('/Wishlist/GetWishlistCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.wish-count').text(data);
+                    });
             }
            
         })
@@ -206,10 +265,11 @@ $(document).ready(function () {
                     e.preventDefault();
                     let productId = $(this).data('id');
 
-                    fetch('basket/AddBasket?id=' + productId)
+                    fetch('/basket/AddBasket?id=' + productId)
                         .then(res => {
                             return res.text();
-                        }).then(data => {
+                        })
+                        .then(data => {
 
                             $('.mini-cart-inner-content').html(data)
                             const Toast = Swal.mixin({
@@ -226,8 +286,14 @@ $(document).ready(function () {
 
                             Toast.fire({
                                 icon: 'success',
-                                title: 'Məhsul Səbətə Əlavə Olundu'
+                                title: 'Product Added to Cart'
                             })
+                            fetch('basket/GetBasketCount')
+                                .then(res => {
+                                    return res.json();
+                                }).then(data => {
+                                    $('.count').text(data);
+                                });
                         })
                 })
                 $(".productQuickModal").on('click', function (e) {
@@ -242,18 +308,75 @@ $(document).ready(function () {
                             $('.modal').on('shown.bs.modal', function (e) {
                                 e.preventDefault();
                                 $('.product-modal-carousel').slick('setPosition');
-                                $(".addToCart").on('click', function (e) {
+                                $(".addToCard").on('click', function (e) {
                                     e.preventDefault();
-                                    let productId = $(this).data('id');
+                                    let productId = $(this).attr('data-id');
 
                                     fetch('/basket/AddBasket?id=' + productId)
                                         .then(res => {
                                             return res.text();
-                                        }).then(data => {
+                                        })
+                                        .then(data => {
                                             $('.mini-cart-inner-content').html(data);
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'bottom-end',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: false,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            })
+
+                                            Toast.fire({
+                                                icon: 'success',
+                                                title: 'Product Added to Cart'
+                                            })
+                                            fetch('basket/GetBasketCount')
+                                                .then(res => {
+                                                    return res.json();
+                                                }).then(data => {
+                                                    $('.count').text(data);
+                                                });
                                         });
 
                                 });
+                                $(".addToWishlist").on('click', function (e) {
+                                    e.preventDefault();
+                                    let productId = $(this).attr('data-id');
+                                    fetch('/Wishlist/AddWishlist?id=' + productId)
+                                        .then(res => {
+                                            return res.text();
+                                        })
+                                        .then(data => {
+                                            console.log(data)
+                                            $('.wishlist-inner-content').html(data)
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'bottom-end',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: false,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            })
+
+                                            Toast.fire({
+                                                icon: 'success',
+                                                title: 'Product Added to WishList'
+                                            })
+                                            fetch('/Wishlist/GetWishlistCount')
+                                                .then(res => {
+                                                    return res.json();
+                                                }).then(data => {
+                                                    $('.wish-count').text(data);
+                                                });
+                                        })
+                                })
 
                             })
                             $('.product-modal-carousel').slick({
@@ -304,7 +427,9 @@ $(document).ready(function () {
                                     }
                                 ]
                             });
+
                         })
+
                 })
                 $(".addToWishlist").on('click', function (e) {
                     e.preventDefault();
@@ -329,12 +454,17 @@ $(document).ready(function () {
 
                             Toast.fire({
                                 icon: 'success',
-                                title: 'Məhsul İstəklərə Əlavə Olundu'
+                                title: 'Product Added to WishList'
                             })
+                            fetch('/Wishlist/GetWishlistCount')
+                                .then(res => {
+                                    return res.json();
+                                }).then(data => {
+                                    $('.wish-count').text(data);
+                                });
                         })
                 })
             })
-
     })
     $(document).on('click', '.addAddress', function (e) {
         e.preventDefault();
@@ -347,5 +477,9 @@ $(document).ready(function () {
             .not(this)
             .collapse('toggle');
     })
+    $('.addToWishlist i').on('click', function () {
+        $(this).removeClass('fa-regular fa-heart').addClass("fa-solid fa-heart")
+    })
+   
 })
 

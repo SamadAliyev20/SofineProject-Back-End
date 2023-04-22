@@ -67,9 +67,12 @@
                     <div class="modal-line">
                         <hr>
                     </div>
-                    <div class="pro-checkout">
-                        <button class="btn-checkout">Checkout</button>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        <div class="pro-checkout">
+                        <a asp-controller="Order" asp-action="checkout" class="btn-checkout">Checkout</a>
                     </div>
+                    }
                 </div>
             </div>
         </div>

@@ -181,5 +181,20 @@ namespace SofineProject.Controllers
 
             return PartialView("_WishlistCartPartial", wishlistVMs);
         }
-    }
+		[HttpGet]
+		public IActionResult GetWishlistCount()
+		{
+			string wishList = HttpContext.Request.Cookies["wishlist"];
+
+			if (string.IsNullOrWhiteSpace(wishList))
+			{
+				return Json(0);
+			}
+
+			List<WishlistVM> wishlistVMs = JsonConvert.DeserializeObject<List<WishlistVM>>(wishList);
+			int count = wishlistVMs.Select(b => b.Id).Distinct().Count();
+
+			return Json(count);
+		}
+	}
 }

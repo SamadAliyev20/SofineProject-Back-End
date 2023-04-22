@@ -39,7 +39,7 @@
 						<img src="assets/img/Banner/banner-1.jpg">
 					</div>
 					<div class="banner-title">
-						<a href="#">Shop Men's</a>
+						<a asp-controller="Shop" asp-action="Index">Shop Men's</a>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 						<img src="assets/img/Banner/banner-2.jpg">
 					</div>
 					<div class="banner-title">
-						<a href="#">Shop Women's</a>
+						<a asp-controller="Shop" asp-action="Index">Shop Women's</a>
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 								<p>Casual pieces for chilling at home.</p>
 							</div>
 						</div>
-						<a href="#">Discover Now</a>
+						<a asp-controller="Shop" asp-action="Index">Discover Now</a>
 					</div>
 				</div>
 			</div>
@@ -91,8 +91,8 @@
 						<div class="product-single-item">
 							<div class="product-thumb mb-4">
 								<a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id" class="product-img">
-									<img class="first-image" src="assets/img/Product/@product.MainImage" alt="">
-									<img class="second-image" src="assets/img/Product/@product.HoverImage" alt="">
+									<img class="first-image" src="~/assets/img/Product/@product.MainImage" alt="">
+									<img class="second-image" src="~/assets/img/Product/@product.HoverImage" alt="">
 								</a>
 							</div>
 							<div class="product-content">
@@ -120,7 +120,7 @@
 									}
 								</div>
 								<div class="heart-button">
-									<a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i class="fa-regular fa-heart"></i></a>
+									<a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i style="color: #ff0000;" class="fa-regular fa-heart"></i></a>
 								</div>
 								<div class="group-button">
 									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">
@@ -151,7 +151,7 @@
 						Shop the world’s best destinations from home
 					</div>
 					<div class="category-link">
-						<a href="#">All Categories</a>
+						<a asp-controller="Shop" asp-action="Index">All Categories</a>
 					</div>
 				</div>
 			</div>
@@ -169,7 +169,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -178,7 +178,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="category-single-item">
 						<div class="category-img">
-							<a href="">
+							<a asp-controller="Shop" asp-action="Index">
 								<img src="assets/img/Category/category-4.jpg" alt="">
 							</a>
 						</div>
@@ -189,7 +189,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -198,7 +198,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="category-single-item">
 						<div class="category-img">
-							<a href="">
+							<a asp-controller="Shop" asp-action="Index">
 								<img src="assets/img/Category/category-1.jpg" alt="">
 							</a>
 						</div>
@@ -209,7 +209,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -218,7 +218,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="category-single-item">
 						<div class="category-img">
-							<a href="">
+							<a asp-controller="Shop" asp-action="Index">
 								<img src="assets/img/Category/category-4.jpg" alt="">
 							</a>
 						</div>
@@ -229,7 +229,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -238,7 +238,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="category-single-item">
 						<div class="category-img">
-							<a href="">
+							<a asp-controller="Shop" asp-action="Index">
 								<img src="assets/img/Category/category-5.jpg" alt="">
 							</a>
 						</div>
@@ -249,7 +249,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -258,7 +258,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="category-single-item">
 						<div class="category-img">
-							<a href="">
+							<a asp-controller="Shop" asp-action="Index">
 								<img src="assets/img/Category/category-6.jpg" alt="">
 							</a>
 						</div>
@@ -269,7 +269,7 @@
 							</a>
 						</div>
 						<div class="category-arrow">
-							<a href="#">
+							<a asp-controller="Shop" asp-action="Index">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</div>
@@ -295,8 +295,8 @@
 						<div class="product-single-item">
 							<div class="product-thumb mb-4">
 								<a asp-controller="Shop" asp-action="Detail" asp-route-productId="@product.Id" class="product-img">
-									<img class="first-image" src="assets/img/Product/@product.MainImage" alt="">
-									<img class="second-image" src="assets/img/Product/@product.HoverImage" alt="">
+									<img class="first-image" src="~/assets/img/Product/@product.MainImage" alt="">
+									<img class="second-image" src="~/assets/img/Product/@product.HoverImage" alt="">
 								</a>
 							</div>
 							<div class="product-content">
@@ -324,7 +324,7 @@
 									}
 								</div>
 								<div class="heart-button">
-									<a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i class="fa-regular fa-heart"></i></a>
+									<a style="cursor:pointer" class="addToWishlist" data-id="@product.Id"><i style="color: #ff0000;" class="fa-regular fa-heart"></i></a>
 								</div>
 								<div class="group-button">
 									<a class="productQuickModal" asp-action="ProductModal" asp-controller="Product" asp-route-id="@product.Id" data-bs-toggle="modal" data-bs-target="#product-quick-view">

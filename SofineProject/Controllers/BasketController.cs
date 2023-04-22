@@ -193,9 +193,25 @@ namespace SofineProject.Controllers
             }
             return PartialView("_BasketCartPartial", basketVMs);
         }
+		[HttpGet]
+		public IActionResult GetBasketCount()
+		{
+			string basket = HttpContext.Request.Cookies["basket"];
+
+			if (string.IsNullOrWhiteSpace(basket))
+			{
+				return Json(0);
+			}
+
+			List<BasketVM> basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
+			int count = basketVMs.Select(b => b.Id).Distinct().Count();
+
+			return Json(count);
+		}
 
 
 
 
-    }
+
+	}
 }

@@ -36,8 +36,24 @@ $(document).ready(function () {
 
                                 Toast.fire({
                                     icon: 'success',
-                                    title: 'Məhsul Səbətə Əlavə Olundu'
+                                    title: 'Product Added to Cart'
                                 })
+                                fetch('basket/GetBasketCount')
+                                    .then(res => {
+                                        return res.json();
+                                    }).then(data => {
+                                        $('.count').text(data);
+                                    });
+                                $('.add').click(function () {
+                                    if ($(this).prev().val()) {
+                                        $(this).prev().val(+$(this).prev().val() + 1);
+                                    }
+                                });
+                                $('.sub').click(function () {
+                                    if ($(this).next().val() > 1) {
+                                        if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+                                    }
+                                });
                             });
 
                     });
@@ -65,8 +81,14 @@ $(document).ready(function () {
 
                                 Toast.fire({
                                     icon: 'success',
-                                    title: 'Məhsul İstəklərə Əlavə Olundu'
+                                    title: 'Product Added to WishList'
                                 })
+                                fetch('/Wishlist/GetWishlistCount')
+                                    .then(res => {
+                                        return res.json();
+                                    }).then(data => {
+                                        $('.wish-count').text(data);
+                                    });
                             })
                     })
 
@@ -375,6 +397,7 @@ $(document).ready(function () {
     e.preventDefault();
     $('.mini-cart-box').toggleClass('active');
     $('.mask_opened').toggleClass('active')
+
   });
   $('.cart-close-btn').on('click', function (e) {
     e.preventDefault();

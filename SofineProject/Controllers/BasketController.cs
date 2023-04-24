@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NuGet.ContentModel;
@@ -62,6 +63,8 @@ namespace SofineProject.Controllers
             }
             if (!await _context.Products.AnyAsync(p => p.IsDeleted == false && p.Id == id)) { return NotFound(); }
 
+            IEnumerable<Product> products = await _context.Products.Where(p => p.IsDeleted == false).ToListAsync();
+            Product product1 = products.FirstOrDefault(p => p.Id == id);
             string basket = HttpContext.Request.Cookies["basket"];
 
             List<BasketVM> basketVMs = null;
@@ -79,7 +82,11 @@ namespace SofineProject.Controllers
 
                 if (basketVMs.Exists(b => b.Id == id))
                 {
-                    basketVMs.Find(b => b.Id == id).Count += 1;
+                    var item = basketVMs.Find(b => b.Id == id);
+                    if (item.Count < product1.Count)
+                    {
+                        item.Count += 1;
+                    }
                 }
                 else
                 {
@@ -193,7 +200,34 @@ namespace SofineProject.Controllers
             }
             return PartialView("_BasketCartPartial", basketVMs);
         }
-		[HttpGet]
+        public async Task<IActionResult> GetBasketForMiniCart()
+        {
+
+            string basket = HttpContext.Request.Cookies["basket"];
+            List<BasketVM> basketVMs = null;
+            if (string.IsNullOrEmpty(basket))
+            {
+                return BadRequest();
+            }
+            else
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
+            }
+            foreach (BasketVM basketVM in basketVMs)
+            {
+                Product product = await _context.Products
+                    .FirstOrDefaultAsync(p => p.Id == basketVM.Id && p.IsDeleted == false);
+
+                if (product != null)
+                {
+                    basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                    basketVM.Title = product.Title;
+                    basketVM.Image = product.MainImage;
+                }
+            }
+            return PartialView("_BasketMiniCartPartial", basketVMs);
+        }
+        [HttpGet]
 		public IActionResult GetBasketCount()
 		{
 			string basket = HttpContext.Request.Cookies["basket"];

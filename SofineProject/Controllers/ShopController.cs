@@ -94,13 +94,12 @@ namespace SofineProject.Controllers
                 minValue = double.Parse(arr[0]);
                 maxValue = double.Parse(arr[1]);
             }
-
-
             IEnumerable<Product> product = await _context.Products.Where
                 (p => p.IsDeleted == false && ((p.DiscountedPrice > 0
                 ? p.DiscountedPrice : p.Price) >= minValue
                 && (p.DiscountedPrice > 0 ? p.DiscountedPrice
                 : p.Price) <= (maxValue == 0 ? 400 : maxValue))).ToListAsync();
+
             return PartialView("_ProductListPartial", product);
 
         }

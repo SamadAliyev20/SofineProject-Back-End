@@ -190,20 +190,20 @@
         @if (Model.Products.PageIndex > 1)
         {
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" asp-action="index" asp-controller="shop" asp-route-pageIndex=@(Model.Products.PageIndex -1) asp-route-sortby="@Model.SortBy">
+                <a class="page-link" aria-label="Previous" asp-action="index" asp-controller="shop" asp-route-pageIndex=@(Model.Products.PageIndex -1) asp-route-sortby="@Model.SortBy" asp-route-categoryId="@ViewBag.categoryId" asp-route-productTypeId="@ViewBag.productTypeId">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
         }
         @for (int i = Model.Products.StartPage; i <= Model.Products.EndPage; i++)
         {
-            <li class="page-item @(Model.Products.PageIndex==i ? "active": "" )"><a class="page-link" asp-action="index" asp-controller="shop" asp-route-pageIndex=@i asp-route-sortby="@Model.SortBy">@i</a></li>
+            <li class="page-item @(Model.Products.PageIndex==i ? "active": "" )"><a class="page-link" asp-action="index" asp-controller="shop" asp-route-pageIndex=@i asp-route-sortby="@Model.SortBy" asp-route-categoryId="@ViewBag.categoryId" asp-route-productTypeId="@ViewBag.productTypeId">@i</a></li>
         }
         
         @if (Model.Products.PageIndex < Model.Products.TotalPage)
         {
             <li class="page-item">
-                <a class="page-link" aria-label="Next" asp-action="index" asp-controller="shop" asp-route-pageIndex=@(Model.Products.PageIndex +1) asp-route-sortby="@Model.SortBy">
+                <a class="page-link" aria-label="Next" asp-action="index" asp-controller="shop" asp-route-pageIndex=@(Model.Products.PageIndex +1) asp-route-sortby="@Model.SortBy" asp-route-categoryId="@ViewBag.categoryId" asp-route-productTypeId="@ViewBag.productTypeId">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

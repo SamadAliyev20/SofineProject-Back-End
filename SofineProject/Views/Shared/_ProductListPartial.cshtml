@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Product>
 @foreach (Product product in Model)
 {
+	
 	var reviews = product?.Reviews;
 	double averageStars = reviews != null && reviews.Any() ? reviews.Average(r => r.Star) : 0;
 	<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">

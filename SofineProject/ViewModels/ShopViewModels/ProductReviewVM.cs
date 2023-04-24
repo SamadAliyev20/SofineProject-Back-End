@@ -1,4 +1,5 @@
 ﻿using SofineProject.Models;
+using SofineProject.ViewModels.BasketViewModels;
 
 namespace SofineProject.ViewModels.ShopViewModels
 {
@@ -6,5 +7,6 @@ namespace SofineProject.ViewModels.ShopViewModels
 	{
 		public Product Product { get; set; }
 		public Review Review { get; set; }
+
 	}
 }

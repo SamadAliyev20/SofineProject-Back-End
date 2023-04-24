@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using SofineProject.ViewModels.BasketViewModels;
 
 namespace SofineProject.Models
 {
@@ -40,5 +41,6 @@ namespace SofineProject.Models
 
 		public IEnumerable<Review>? Reviews { get; set; }
 
+        
 	}
 }

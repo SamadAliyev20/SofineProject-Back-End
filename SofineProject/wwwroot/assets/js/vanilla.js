@@ -7,6 +7,13 @@ $(document).ready(function () {
             })
             .then(data => {
                 $('.cart-section').html(data)
+                fetch("/basket/GetBasketForMiniCart")
+                    .then(res => {
+                        return res.text();
+                    })
+                    .then(data => {
+                        $('.mini-cart-inner-content').html(data)
+                    })
             })
     }))
     $(document).on('click', '.increase-count', (function () {
@@ -17,12 +24,15 @@ $(document).ready(function () {
             })
             .then(data => {
                 $('.cart-section').html(data)
+                fetch("/basket/GetBasketForMiniCart")
+                    .then(res => {
+                        return res.text();
+                    })
+                    .then(data => {
+                        $('.mini-cart-inner-content').html(data)
+                    })
             })
     }))
-
-
-
-
     $('.searchInput').on('keyup', function () {
         let search = $(this).val();
         if (search.trim().length >= 3 && search != null) {
@@ -243,11 +253,10 @@ $(document).ready(function () {
         e.preventDefault();
         let value = $('.rangeInput').val();
 
-        fetch('/Shop/RangeFilter?range=' + value)
+        fetch('/Shop/RangeFilter?range=' + value )
             .then(res => {
                 return res.text();
             }).then(data => {
-                console.log(data)
                 $('.pro-area').html(data)
                 $(".addToBasket").on('click', function (e) {
                     e.preventDefault();

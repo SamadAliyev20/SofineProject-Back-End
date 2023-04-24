@@ -4,6 +4,7 @@ using SofineProject.DataAccessLayer;
 using SofineProject.Interfaces;
 using SofineProject.Models;
 using SofineProject.Services;
+using SofineProject.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -28,6 +29,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("SmtpSetting"));
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddSession(options =>
 {

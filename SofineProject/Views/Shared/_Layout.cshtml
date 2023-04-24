@@ -347,6 +347,17 @@
 			});
 		</script>
 	}
+	@if (TempData["ToasterMessage2"] != null)
+	{
+		<script>
+			Swal.fire({
+				title: '@TempData["ToasterMessage2"]',
+				icon: 'success',
+				timer: 4000,
+				showConfirmButton: false
+			});
+		</script>
+	}
 	<!--=======================Javascript============================-->
 </body>
 

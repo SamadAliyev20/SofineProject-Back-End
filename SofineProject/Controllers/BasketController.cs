@@ -72,7 +72,7 @@ namespace SofineProject.Controllers
                 {
                    new BasketVM {Id= (int)id,Count=1}
                 };
-            }
+			}
             else
             {
                 basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(basket);

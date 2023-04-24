@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MimeKit;
 using Newtonsoft.Json;
 using NuGet.Packaging.Signing;
 using SofineProject.DataAccessLayer;
 using SofineProject.Models;
+using SofineProject.ViewModels;
 using SofineProject.ViewModels.AccountViewModels;
 using System.Data;
 using System.Net;
@@ -17,13 +20,15 @@ namespace SofineProject.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly AppDbContext _context;  
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext context)
+        private readonly AppDbContext _context;
+		private readonly SmtpSetting _smtpSetting;
+		public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext context, IOptions<SmtpSetting> smtpSetting)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
-        }
+			_smtpSetting = smtpSetting.Value;
+		}
         [HttpGet]
         public IActionResult Register()
         {
@@ -301,5 +306,89 @@ namespace SofineProject.Controllers
 
 			return RedirectToAction(nameof(Profile));
         }
-    }
+
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
+		{
+			if (!ModelState.IsValid) return View(forgotPassword);
+
+			AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedEmail == forgotPassword.Email.Trim().ToUpperInvariant());
+
+			if (appUser == null)
+			{
+				return RedirectToAction("ForgotPassword", "account");
+			}
+
+			string token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+
+			string url = Url.Action("ResetPassword", "Account", new { token, email = forgotPassword.Email },
+				HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
+
+			string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "PassReset.cshtml");
+			string templateContent = await System.IO.File.ReadAllTextAsync(fullpath);
+			templateContent = templateContent.Replace("{{url}}", url);
+
+			MimeMessage mimeMessage = new();
+			mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+			mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+			mimeMessage.Subject = "Reset Password";
+			mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+			{
+				Text = templateContent
+			};
+			using (SmtpClient smtpClient = new())
+			{
+				await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+				await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+				await smtpClient.SendAsync(mimeMessage);
+				await smtpClient.DisconnectAsync(true);
+				smtpClient.Dispose();
+			}
+
+            TempData["ToasterMessage2"] = "Your password reset request has been sent to your email. Please check your email!";
+            return RedirectToAction("index", "Home");
+
+
+
+		}
+
+		[HttpGet]
+		public IActionResult ResetPassword(string token, string email)
+		{
+			var model = new ResetPasswordVM { Token = token, Email = email };
+			return View(model);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(resetPasswordVM);
+			}
+			AppUser appUser = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
+
+			if (appUser == null) { return NotFound(); }
+
+			IdentityResult identityResult = await _userManager.ResetPasswordAsync(appUser, resetPasswordVM.Token, resetPasswordVM.Password);
+
+			if (!identityResult.Succeeded)
+			{
+				foreach (var error in identityResult.Errors)
+				{
+					ModelState.TryAddModelError(error.Code, error.Description);
+				}
+				return View();
+			}
+            TempData["ToasterMessage"] = "Your password has been successfully changed!";
+            return RedirectToAction("login", "account");
+		}
+	}
 }

@@ -96,7 +96,7 @@
                                 <ul class="category-list">
                                     @foreach (Category category in Model.Categories)
                                     {
-                                        <li><a style="cursor:pointer" class="category-selector" asp-route-categoryId="@category.Id" asp-route-productTypeId="@ViewBag.productTypeId">@category.Name</a></li>
+                                        <li><a style="cursor:pointer" class="category-selector" asp-route-categoryId="@category.Id" asp-route-sortby="@ViewBag.sortby" asp-route-productTypeId="@ViewBag.productTypeId">@category.Name</a></li>
                                     }
 
                                 </ul>
@@ -109,7 +109,7 @@
                                 <ul class="category-list">
                                     @foreach (ProductType productType in Model.ProductTypes)
                                     {
-                                        <li><a style="cursor:pointer" class="productType-selector" asp-route-categoryId="@ViewBag.categoryId" asp-route-productTypeId="@productType.Id">@productType.Name</a></li>
+                                        <li><a style="cursor:pointer" class="productType-selector" asp-route-categoryId="@ViewBag.categoryId" asp-route-productTypeId="@productType.Id" asp-route-sortby="@ViewBag.sortby">@productType.Name</a></li>
                                     }
 
                                 </ul>
@@ -158,10 +158,10 @@
                                 <span>Showing @Model.Products?.Count()–@Model.Products?.Count() of 13 results</span>
                             </div>
                             <div class="sort-by-area mx-5">
-                                <form method="post" asp-controller="Shop" asp-action="Index" id="my-form">
+                                <form method="post" id="my-form">
 										<div class="product-short">
 											<p>Sort By:</p>
-											<select class="select" asp-for="SortBy" asp-route-filter="@Model.Filter" asp-route-sortby="@Model.SortBy" onchange="submitForm()" form="my-form">
+                                        <select class="select" asp-for="SortBy" asp-controller="shop" asp-action="index" asp-route-productTypeId="@ViewBag.productTypeId" asp-route-categoryId="@ViewBag.categoryId" asp-route-filter="@Model.Filter" asp-route-sortby="@Model.SortBy" onchange="submitForm()" form="my-form">
 												<option value="1">Name (A - Z)</option>
 												<option value="2">Name (Z - A)</option>
 												<option value="3">Price (Low &gt; High)</option>

@@ -209,9 +209,73 @@ namespace SofineProject.Controllers
 			return Json(count);
 		}
 
+        public async Task<IActionResult> DecreaseBasket(int? productId)
+        {
+            if (productId == null)
+            {
+                return BadRequest();
+            }
+            IEnumerable<Product> products = await _context.Products.Where(p => p.IsDeleted == false).ToListAsync();
+            Product product1= products.FirstOrDefault(p=>p.Id == productId);
+            string basket = HttpContext.Request.Cookies["basket"];
+            List<BasketVM> basketVMs= JsonConvert.DeserializeObject<List<BasketVM>>(basket);
+            if (basketVMs.FirstOrDefault(b => b.Id == productId).Count > 1)
+            {
+                basketVMs.FirstOrDefault(b => b.Id == productId).Count -= 1;
+            }
+            if (!basketVMs.Any(b=>b.Id == productId))
+            {
+                return NotFound();
+            }
+            basket = JsonConvert.SerializeObject(basketVMs);
+            HttpContext.Response.Cookies.Append("basket", basket);
+            foreach (BasketVM basketVM in basketVMs)
+            {
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id && p.IsDeleted == false);
+
+                if (product != null)
+                {
+                    basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                    basketVM.Title = product.Title;
+                    basketVM.Image = product.MainImage;
+                }
+            }
 
 
 
+            return PartialView("_BasketCartPartial", basketVMs);
+        }
+        public async Task<IActionResult> IncreaseBasket(int? productId)
+        {
+            if (productId == null)
+            {
+                return BadRequest();
+            }
+            IEnumerable<Product> products = await _context.Products.Where(p => p.IsDeleted == false).ToListAsync();
+            Product product1 = products.FirstOrDefault(p => p.Id == productId);
+            string basket = HttpContext.Request.Cookies["basket"];
+            List<BasketVM> basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
+            if (basketVMs.FirstOrDefault(b => b.Id == productId).Count < product1.Count)
+            {
+                basketVMs.FirstOrDefault(b => b.Id == productId).Count += 1;
+            }
+            basket = JsonConvert.SerializeObject(basketVMs);
+            HttpContext.Response.Cookies.Append("basket", basket);
+            foreach (BasketVM basketVM in basketVMs)
+            {
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id && p.IsDeleted == false);
 
-	}
+                if (product != null)
+                {
+                    basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                    basketVM.Title = product.Title;
+                    basketVM.Image = product.MainImage;
+                }
+            }
+
+
+
+            return PartialView("_BasketCartPartial", basketVMs);
+        }
+    }
 }

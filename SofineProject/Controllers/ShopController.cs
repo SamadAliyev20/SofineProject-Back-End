@@ -31,6 +31,8 @@ namespace SofineProject.Controllers
             IEnumerable<ProductType> ProductTypes = await _context.ProductTypes.Where(pt => pt.IsDeleted == false).ToListAsync();
             ViewBag.categoryId = categoryId;
             ViewBag.productTypeId = productTypeId;
+            ViewBag.sortby = sortby;
+           
 
 
             if (categoryId != null)

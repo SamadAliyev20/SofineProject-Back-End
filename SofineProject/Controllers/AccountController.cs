@@ -66,7 +66,58 @@ namespace SofineProject.Controllers
             }
 
             await _userManager.AddToRoleAsync(appUser, "Member");
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+
+            string url = Url.Action("EmailConfirm", "Account", new { id = appUser.Id, token = token },
+                HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
+
+            string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "EmailConfirmPartial.cshtml");
+            string templateContent = await System.IO.File.ReadAllTextAsync(fullpath);
+            templateContent = templateContent.Replace("{{url}}", url);
+
+            MimeMessage mimeMessage = new();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Email Confirmation";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = templateContent
+            };
+            using (SmtpClient smtpClient = new())
+            {
+                await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
+            }
+            TempData["ToasterMessage2"] = "Your account has been successfully created, please confirm your account.Check your email.";
             return RedirectToAction("Login","Account");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EmailConfirm(string id, string token)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return BadRequest();
+            }
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            if (appUser == null) { return NotFound(); }
+
+            IdentityResult identityResult = await _userManager.ConfirmEmailAsync(appUser, token);
+
+            if (!identityResult.Succeeded)
+            {
+
+                return BadRequest();
+
+            }
+            TempData["ToasterMessage2"] = "Your account has been successfully Confirmed.";
+            await _signInManager.SignInAsync(appUser, false);
+            return RedirectToAction("index", "home");
+
         }
         [HttpGet]
         public IActionResult Login()

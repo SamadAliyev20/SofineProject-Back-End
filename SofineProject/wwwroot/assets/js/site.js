@@ -38,7 +38,7 @@ $(document).ready(function () {
                                     icon: 'success',
                                     title: 'Product Added to Cart'
                                 })
-                                fetch('basket/GetBasketCount')
+                                fetch('/basket/GetBasketCount')
                                     .then(res => {
                                         return res.json();
                                     }).then(data => {

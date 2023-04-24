@@ -99,7 +99,7 @@ $(document).ready(function () {
                 }).then(data => {
                     $('.cart-section').html(data)
                 })
-                fetch('basket/GetBasketCount')
+                fetch('/basket/GetBasketCount')
                     .then(res => {
                         return res.json();
                     }).then(data => {
@@ -125,8 +125,15 @@ $(document).ready(function () {
         fetch('/basket/AddBasket?id=' + productId)
             .then(res => {
                 return res.text();
-            }).then(data => {
+            })
+            .then(data => {
                 $('.mini-cart-inner-content').html(data);
+                fetch('/basket/GetBasketCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.count').text(data);
+                    });
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'bottom-end',
@@ -143,12 +150,6 @@ $(document).ready(function () {
                     icon: 'success',
                     title: 'Product Added to Cart'
                 })
-                fetch('basket/GetBasketCount')
-                    .then(res => {
-                        return res.json();
-                    }).then(data => {
-                        $('.count').text(data);
-                    });
                 $('.add').click(function () {
                     if ($(this).prev().val()) {
                         $(this).prev().val(+$(this).prev().val() + 1);

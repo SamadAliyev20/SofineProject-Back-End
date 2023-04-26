@@ -20,8 +20,8 @@
                             {
                                 <tr>
                                     <td class="pro-img">
-                                        <a href="product-details.html">
-                                            <img class="img-fluid" src="assets/img/Product/@basketVM.Image">
+                                        <a asp-controller="Shop" asp-action="Detail" asp-route-productId="@basketVM.Id">
+                                            <img class="img-fluid" src="~/assets/img/Product/@basketVM.Image">
                                         </a>
                                     </td>
                                     <td class="pro-name">@basketVM.Title</td>

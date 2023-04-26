@@ -11,6 +11,7 @@ using SofineProject.DataAccessLayer;
 using SofineProject.Models;
 using SofineProject.ViewModels;
 using SofineProject.ViewModels.AccountViewModels;
+using SofineProject.ViewModels.BasketViewModels;
 using System.Data;
 using System.Net;
 
@@ -148,7 +149,31 @@ namespace SofineProject.Controllers
 				ModelState.AddModelError("", "Email Ve ya Sifre Yanlisdir");
 				return View(loginVM);
 			}
-			TempData["ToasterMessage"] = "Login successfully!";
+            string basket = HttpContext.Request.Cookies["basket"];
+            if (string.IsNullOrWhiteSpace(basket))
+            {
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    List<BasketVM> basketVMs = new List<BasketVM>();
+
+                    foreach (Basket basket1 in appUser.Baskets)
+                    {
+                        BasketVM basketVM = new BasketVM
+                        {
+                            Id = (int)basket1.ProductId,
+                            Count = basket1.Count,
+                        };
+                        basketVMs.Add(basketVM);
+                    }
+                    basket = JsonConvert.SerializeObject(basketVMs);
+                    HttpContext.Response.Cookies.Append("basket", basket);
+                }
+            }
+            else
+            {
+                HttpContext.Response.Cookies.Append("basket", "");
+            }
+            TempData["ToasterMessage"] = "Login successfully!";
 			return RedirectToAction("Index", "Home");
 		}
 		[HttpGet]

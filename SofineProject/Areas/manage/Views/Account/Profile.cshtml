@@ -1,0 +1,53 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Profile";
+}
+<div class="row justify-content-start">
+    <div class="col-lg-2">
+        <h1 class="h3 mb-4 text-gray-800">Profile Page</h1>
+    </div>
+</div>
+<div class="row justify-content-start">
+    <div class="col-lg-2">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control">
+                <span class="text text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurName" class="form-label"></label>
+                <input asp-for="SurName" class="form-control">
+                <span class="text text-danger" asp-validation-for="SurName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control">
+                <span class="text text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" class="form-control">
+                <span class="text text-danger" asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OldPassword" class="form-label"></label>
+                <input asp-for="OldPassword" class="form-control">
+                <span class="text text-danger" asp-validation-for="OldPassword"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control">
+                <span class="text text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control">
+                <span class="text text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+

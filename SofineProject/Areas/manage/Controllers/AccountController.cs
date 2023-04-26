@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.Areas.manage.ViewModels.AccountVMs;
 using SofineProject.Models;
+using System.Data;
 
 namespace SofineProject.Areas.manage.Controllers
 {
@@ -52,5 +54,88 @@ namespace SofineProject.Areas.manage.Controllers
 			TempData["ToasterMessage4"] = "Login successfully!";
 			return RedirectToAction("index", "dashboard", new { areas = "manage" });
 		}
-	}
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account", new { areas = "manage" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            ProfileVM profileVM = new ProfileVM
+            {
+                Name = appUser.Name,
+                SurName = appUser.SurName,
+                UserName = appUser.UserName,
+                Email = appUser.Email,
+            };
+
+            return View(profileVM);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(ProfileVM profileVM)
+        {
+            if (!ModelState.IsValid) return View(profileVM);
+
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            appUser.Name = profileVM.Name;
+            appUser.SurName = profileVM.SurName;
+
+            if (appUser.NormalizedUserName != profileVM.UserName.Trim().ToUpperInvariant())
+            {
+                appUser.UserName = profileVM.UserName;
+            }
+            if (appUser.NormalizedEmail != profileVM.Email.Trim().ToUpperInvariant())
+            {
+                appUser.Email = profileVM.Email;
+            }
+
+
+            IdentityResult identityResult = await _userManager.UpdateAsync(appUser);
+
+            if (!identityResult.Succeeded)
+            {
+                foreach (IdentityError identityError in identityResult.Errors)
+                {
+                    ModelState.AddModelError("", identityError.Description);
+                    return View(profileVM);
+                }
+            }
+            await _signInManager.SignInAsync(appUser, true);
+
+            if (!string.IsNullOrWhiteSpace(profileVM.OldPassword))
+            {
+                if (!await _userManager.CheckPasswordAsync(appUser, profileVM.OldPassword))
+                {
+                    ModelState.AddModelError("OldPassword", "Köhnə şifrə Yanlışdır");
+                    return View(profileVM);
+                }
+                if (profileVM.OldPassword == profileVM.Password)
+                {
+                    ModelState.AddModelError("Password", "Köhnə şifrə ilə yeni şifrə eyni ola bilməz!");
+                    return View(profileVM);
+                }
+
+                string token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+
+                identityResult = await _userManager.ResetPasswordAsync(appUser, token, profileVM.Password);
+
+                if (!identityResult.Succeeded)
+                {
+                    foreach (IdentityError identityError in identityResult.Errors)
+                    {
+                        ModelState.AddModelError("", identityError.Description);
+                        return View(profileVM);
+                    }
+                }
+            }
+            TempData["ToasterMessage4"] = "Profil uğurla dəyişdirildi!";
+            return RedirectToAction("index", "dashboard", new { areas = "manage" });
+        }
+    }
 }

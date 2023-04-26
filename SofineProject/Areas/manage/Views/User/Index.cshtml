@@ -1,0 +1,74 @@
+﻿@model PageNatedList<UserVM>
+@{
+	ViewData["Title"] = "Index";
+	int count = (Model.PageIndex - 1) * 5;
+}
+
+<div class="d-flex flex-row">
+	<div class="col-lg-2">
+		<h1 class="h3 mb-3 text-gray-800">Users Page</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Name</th>
+					<th>SurName</th>
+					<th>UserName</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Settings</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (UserVM userVM in Model)
+				{
+					count++;
+					<tr>
+						<td>@count</td>
+						<td>@userVM.Name</td>
+						<td>@userVM.SurName</td>
+						<td>@userVM.UserName</td>
+						<td>@userVM.Email</td>
+						<td>@userVM.RoleName</td>
+
+						<td>
+							<a asp-area="manage" asp-controller="User" asp-action="ChangeRole" asp-route-id="@userVM.Id" class="btn btn-warning">Update Role</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="col-lg-12">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			@if (Model.PageIndex > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-action="Index" asp-controller="User" asp-area="manage" asp-route-pageIndex="@(Model.PageIndex-1)">Previous</a>
+				</li>
+			}
+
+			@for (int i = Model.StartPage; i <= Model.EndPage; i++)
+			{
+				<li class="page-item @(Model.PageIndex == i ? "active":"")">
+					<a class="page-link" asp-action="Index" asp-controller="User" asp-area="manage" asp-route-pageIndex="@i">@i</a>
+				</li>
+			}
+
+			@if (Model.PageIndex < Model.TotalPage)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-action="Index" asp-controller="User" asp-area="manage" asp-route-pageIndex="@(Model.PageIndex+1)">Next</a>
+				</li>
+			}
+		</ul>
+	</nav>
+</div>
+
+

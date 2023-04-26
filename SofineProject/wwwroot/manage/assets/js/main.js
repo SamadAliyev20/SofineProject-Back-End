@@ -85,6 +85,17 @@ jQuery(document).ready(function($) {
 		} 
 		
 	});
+
+	$(document).on('click', '.deleteImage', function (e) {
+		e.preventDefault();
+		let url = $('.deleteImage').attr('href');
+		let imageId = $(this).attr('data-imageId');
+		fetch(url + "?imageId=" + imageId)
+			.then(res => res.text())
+			.then(data => {
+				$('.productImages').html(data)
+			})
+	})
   
  
 });

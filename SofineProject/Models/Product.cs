@@ -29,7 +29,7 @@ namespace SofineProject.Models
         public int ProductTypeId { get; set; }
 
         public ProductType ProductType { get; set; }          
-        public IEnumerable<ProductImage> ProductImages { get; set; }
+        public List<ProductImage>? ProductImages { get; set; }
         [NotMapped]
         public IEnumerable<IFormFile>? Files { get; set; }
 

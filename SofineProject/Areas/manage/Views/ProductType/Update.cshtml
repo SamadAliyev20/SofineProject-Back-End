@@ -1,0 +1,25 @@
+﻿@model ProductType
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row justify-content-start">
+    <div class="col-lg-3">
+        <h1 class="h3 mb-4 text-gray-800">Product Type Update Page</h1>
+    </div>
+    <div class="col-lg-3">
+        <a class="btn btn-primary" asp-action="index" asp-controller="ProductType" asp-area="manage">Go To Home</a>
+    </div>
+    </div>
+<div class="row justify-content-start">
+        <div class="col-lg-6">
+        <form  method="post">
+  <div class="form-group">
+      <label asp-for="Name" class="form-label"></label>
+     <input asp-for="Name" class="form-control">
+     <span class="text text-danger" asp-validation-for="Name"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        </div>
+    </div>

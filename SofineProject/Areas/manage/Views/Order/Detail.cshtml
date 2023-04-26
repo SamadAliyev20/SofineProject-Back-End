@@ -1,0 +1,76 @@
+﻿@model Order
+@{
+	ViewData["Title"] = "Detail";
+	var count = 0;
+}
+
+<div class="d-flex flex-row">
+	<div class="col-lg-2">
+		<h1 class="h3 mb-3 text-gray-800">Order Detail Page</h1>
+	</div>
+	<div class="col-lg-3">
+		<a class="btn btn-primary" asp-action="index" asp-controller="order" asp-area="manage">Go To Home</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-4">
+		<div class="card" style="width:18rem;">
+			<div class="card-body">
+				<h5 class="card-title">No:@Model.No</h5>
+				<h5 class="card-title">Full Name:@($"{Model.Name} {Model.SurName}")</h5>
+			</div>
+		</div>
+	</div>
+</div>
+@if (Model.OrderItems != null && Model.OrderItems.Count() > 0)
+{
+	<div class="row">
+		<div class="col-lg-12">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Count</th>
+						<th>Total Price</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (OrderItem orderItem in Model.OrderItems)
+					{
+						count++;
+						<tr>
+							<td>@count</td>
+							<td>@orderItem.Product.Title</td>
+							<td>@orderItem.Price</td>
+							<td>@orderItem.Count</td>
+							<td>@(orderItem.Price * orderItem.Count)</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+<div class="row">
+	<div class="col">
+		<form method="post" asp-area="manage" asp-controller="order" asp-action="changeStatus">
+			<input type="hidden" name="id" value="@Model.Id" />
+			<div id="parentList">
+				<div class="input-group mb-3">
+					<select asp-for="Status" class="custom-select" asp-items="@Html.GetEnumSelectList<OrderType>()">
+					</select>
+					<span class="text text-danger" asp-validation-for="Status"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label asp-for="Comment" class="form-label"></label>
+				<input asp-for="Comment" class="form-control">
+				<span class="text text-danger" asp-validation-for="Comment"></span>
+			</div>
+			<button type="submit" class="btn btn-outline-dark">Change Status</button>
+		</form>
+	</div>
+</div>

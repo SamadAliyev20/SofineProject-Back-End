@@ -1,20 +1,17 @@
-﻿@model Category
+﻿@model ProductType
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Detail";
 }
 
 <div class="d-flex flex-row">
     <div class="col-lg-3">
-        <h1 class="h3 mb-3 text-gray-800">Category Delete Page</h1>
+        <h1 class="h3 mb-3 text-gray-800">Product Type Detail Page</h1>
     </div>
     <div class="col-lg-3">
-        <h3 class="h3 mb-3">Category Name:<span style="color:red">@Model.Name</span></h3>
-    </div>
-    <div class="col-lg-2">
-        <a class="btn btn-primary" asp-action="index" asp-controller="Category" asp-area="manage">Go To Home</a>
+        <h3 class="h3 mb-3">Product Type Name:<span style="color:red">@Model.Name</span></h3>
     </div>
     <div class="col-lg-3">
-        <a class="btn btn-danger" asp-action="deletecategory" asp-controller="Category" asp-area="manage" asp-route-id="@Model.Id">Delete</a>
+        <a class="btn btn-primary" asp-action="index" asp-controller="ProductType" asp-area="manage">Go To Home</a>
     </div>
 </div>
 <div class="row">

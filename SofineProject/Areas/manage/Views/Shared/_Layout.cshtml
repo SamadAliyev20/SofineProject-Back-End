@@ -89,8 +89,11 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>CRUDS</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="manage" asp-controller="Category" asp-action="Index">Category</a></li>
-                            <li><i class="fa fa-laptop"></i><a asp-area="manage" asp-controller="ProductType" asp-action="Index">Product Type</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="manage" asp-controller="Category" asp-action="Index">Categories</a></li>
+                            <li><i class="fa fa-laptop"></i><a asp-area="manage" asp-controller="ProductType" asp-action="Index">Product Types</a></li>
+                            <li><i class="fa fa-laptop"></i><a asp-area="manage" asp-controller="Product" asp-action="Index">Products</a></li>
+                            <li><i class="fa fa-laptop"></i><a asp-area="manage" asp-controller="Order" asp-action="Index">Orders</a></li>
+                             <li><i class="fa fa-male"></i><a asp-area="manage" asp-controller="User" asp-action="Index">Users</a></li>
                             
                         </ul>
                     </li>
@@ -242,6 +245,7 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="~/manage/assets/js/init/fullcalendar-init.js"></script>
+    @RenderSection("Scripts",false);
 
     <!--Local Stuff-->
     <script>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.DataAccessLayer;
 using SofineProject.Models;
@@ -7,6 +8,7 @@ using SofineProject.ViewModels;
 namespace SofineProject.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin")]
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;

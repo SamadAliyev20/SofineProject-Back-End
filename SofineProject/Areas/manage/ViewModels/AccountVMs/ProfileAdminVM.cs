@@ -2,7 +2,7 @@
 
 namespace SofineProject.Areas.manage.ViewModels.AccountVMs
 {
-    public class ProfileVM
+    public class ProfileAdminVM
     {
         [StringLength(100)]
         public string? Name { get; set; }
@@ -17,14 +17,14 @@ namespace SofineProject.Areas.manage.ViewModels.AccountVMs
         public string UserName { get; set; }
 
         [DataType(DataType.Password)]
-        public string? OldPassword { get; set; }
+        public string OldPassword { get; set; }
 
         [DataType(DataType.Password)]
-        public string? Password { get; set; }
+        public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Compare("Password")]
-        public string? ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
 
     }
 }

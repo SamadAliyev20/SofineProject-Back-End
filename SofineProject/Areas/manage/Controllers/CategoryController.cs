@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.DataAccessLayer;
 using SofineProject.Models;
 using SofineProject.ViewModels;
+using System.Data;
 
 namespace SofineProject.Areas.manage.Controllers
 {
 	[Area("manage")]
-	public class CategoryController : Controller
+    [Authorize(Roles = "SuperAdmin")]
+    public class CategoryController : Controller
     {
         private readonly AppDbContext _context;
 

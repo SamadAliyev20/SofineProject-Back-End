@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.Areas.manage.ViewModels.UserVMs;
@@ -9,7 +10,8 @@ using SofineProject.ViewModels;
 namespace SofineProject.Areas.manage.Controllers
 {
 	[Area("manage")]
-	public class UserController : Controller
+    [Authorize(Roles = "SuperAdmin")]
+    public class UserController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;
 		private readonly AppDbContext _context;
@@ -23,7 +25,9 @@ namespace SofineProject.Areas.manage.Controllers
 		}
 		public async Task<IActionResult> Index(int pageIndex = 1)
 		{
-			List<UserVM> query = await _userManager.Users
+            ViewBag.Role = await _roleManager.Roles.Where(r => r.Name != "SuperAdmin").ToListAsync();
+
+            List<UserVM> query = await _userManager.Users
 				.Where(u => u.UserName != User.Identity.Name)
 				.Select(x => new UserVM
 				{
@@ -38,13 +42,18 @@ namespace SofineProject.Areas.manage.Controllers
 				.ToListAsync();
 			foreach (var item in query)
 			{
-				string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == item.Id).RoleId;
-				string roleName = _context.Roles.FirstOrDefault(r => r.Id == roleId).Name;
-				item.RoleName = roleName;
-			}
+                var userRole = _context.UserRoles.FirstOrDefault(u => u.UserId == item.Id);
+                if (userRole != null)
+                {
+                    string roleId = userRole.RoleId;
+                    string roleName = _context.Roles.FirstOrDefault(r => r.Id == roleId)?.Name;
+                    item.RoleName = roleName;
+                }
 
+            }
+           
 
-			return View(PageNatedList<UserVM>.Create(query.AsQueryable(), pageIndex, 5));
+            return View(PageNatedList<UserVM>.Create(query.AsQueryable(), pageIndex, 5));
 		}
 
         [HttpGet]
@@ -55,7 +64,7 @@ namespace SofineProject.Areas.manage.Controllers
             AppUser appUser = await _userManager.FindByIdAsync(id);
             if (appUser == null) return NotFound();
 
-            string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == appUser.Id).RoleId;
+            string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == appUser.Id)?.RoleId;
 
             UserChangeRoleVM userChangeRoleVM = new()
             {
@@ -80,8 +89,8 @@ namespace SofineProject.Areas.manage.Controllers
 
             AppUser appUser = await _userManager.FindByIdAsync(userChangeRoleVM.UserId);
             if (appUser == null) return NotFound();
-            string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == userChangeRoleVM.UserId).RoleId;
-            string roleName = _context.Roles.FirstOrDefault(r => r.Id == roleId).Name;
+            string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == userChangeRoleVM.UserId)?.RoleId;
+            string roleName = _context.Roles.FirstOrDefault(r => r.Id == roleId)?.Name;
             string newRoleName = _roleManager.Roles.FirstOrDefault(r => r.Name != "SuperAdmin" && r.Id == userChangeRoleVM.RoleId).Name;
             await _userManager.RemoveFromRoleAsync(appUser, roleName);
             await _userManager.AddToRoleAsync(appUser, newRoleName);

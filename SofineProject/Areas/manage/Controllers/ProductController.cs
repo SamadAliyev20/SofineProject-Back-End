@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SofineProject.DataAccessLayer;
 using SofineProject.Extentions;
@@ -9,6 +10,7 @@ using SofineProject.ViewModels;
 namespace SofineProject.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;

@@ -2,7 +2,7 @@
 
 namespace SofineProject.Areas.manage.ViewModels.AccountVMs
 {
-	public class LoginVM
+	public class LoginAdminVM
 	{
 		[Required]
 		[EmailAddress]

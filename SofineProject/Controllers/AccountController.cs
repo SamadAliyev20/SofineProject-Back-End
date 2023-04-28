@@ -210,11 +210,15 @@ namespace SofineProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Profile(ProfileVM profileVM)
         {
-            if (!ModelState.IsValid) return View(profileVM);
 
-            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
-
-            appUser.Name = profileVM.Name;
+			if (!ModelState.IsValid)
+            {
+				TempData["Tab"] = "account";
+				return View(profileVM);
+            }
+			AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            
+			appUser.Name = profileVM.Name;
             appUser.SurName = profileVM.SurName;
 
             if (appUser.NormalizedUserName != profileVM.UserName.Trim().ToUpperInvariant())

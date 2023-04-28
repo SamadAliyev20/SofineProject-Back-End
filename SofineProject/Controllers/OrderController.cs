@@ -36,9 +36,28 @@ namespace SofineProject.Controllers
             if (string.IsNullOrWhiteSpace(cookie))
             {
                 return RedirectToAction("Index", "Shop");
-
             }
+
             List<BasketVM> basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
+
+            AppUser appUser = await _userManager.Users.Include(u => u.Addresses.Where(u => u.IsMain && u.IsDeleted == false))
+                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+            if (appUser == null)
+            {
+                // Kullanıcı oturum açmamış, bir kullanıcı nesnesi yok, 
+                // veya kullanıcının herhangi bir adresi yoksa, kullanıcıyı başka bir sayfaya yönlendirin.
+                return RedirectToAction("Index", "Home");
+            }
+
+            Address mainAddress = appUser.Addresses.FirstOrDefault();
+
+            if (mainAddress == null)
+            {
+				TempData["ToasterMessage5"] = "Your address is empty, please add an address and then checkout!";
+				return RedirectToAction("Profile", "Account");
+            }
+
             foreach (BasketVM basketVM in basketVMs)
             {
                 Product product = await _appDbContext.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
@@ -46,29 +65,26 @@ namespace SofineProject.Controllers
                 basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
                 basketVM.Title = product.Title;
             }
-            AppUser appUser = await _userManager.Users.Include(u => u.Addresses.Where(u => u.IsMain && u.IsDeleted == false))
-                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
             Order order = new Order
             {
-                Name = appUser.Name,
-                SurName = appUser.SurName,
-                Email = appUser.Email,
-                Phone = appUser.PhoneNumber,
-                AddressLine = appUser.Addresses.FirstOrDefault().AddressLine,
-                City = appUser.Addresses.FirstOrDefault().City,
-                Country = appUser.Addresses.FirstOrDefault().Country,
-                PostalCode = appUser.Addresses.FirstOrDefault().PostalCode,
-                State = appUser.Addresses.FirstOrDefault().State,
-
+                Name = appUser?.Name,
+                SurName = appUser?.SurName,
+                Email = appUser?.Email,
+                Phone = appUser?.PhoneNumber,
+                AddressLine = mainAddress?.AddressLine,
+                City = mainAddress?.City,
+                Country = mainAddress?.Country,
+                PostalCode = mainAddress?.PostalCode,
+                State = mainAddress?.State,
             };
+
             OrderVM orderVM = new OrderVM
             {
                 Order = order,
-                BasketVMs = basketVMs
-
-
+                BasketVMs = basketVMs,
             };
+
             return View(orderVM);
         }
         [HttpPost]

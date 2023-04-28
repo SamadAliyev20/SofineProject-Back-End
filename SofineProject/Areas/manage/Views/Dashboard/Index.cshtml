@@ -1,4 +1,16 @@
-﻿<div class="content">
+﻿@model DashboardVM
+@{
+    int totalSales = 0;
+    foreach (var order in Model.Orders)
+    {
+        foreach (var item in order.OrderItems)
+        {
+            totalSales += item.Count ?? 0;
+        }
+    }
+
+}
+<div class="content">
     <!-- Animated -->
     <div class="animated fadeIn">
         <!-- Widgets  -->
@@ -12,7 +24,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text">$<span class="count">23569</span></div>
+                                    <div class="stat-text">$<span class="count">@Model.Orders.Sum(o => o.OrderItems?.Sum(oi => oi.Price * oi.Count) ?? 0)</span></div>
                                     <div class="stat-heading">Revenue</div>
                                 </div>
                             </div>
@@ -30,7 +42,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">3435</span></div>
+                                    <div class="stat-text"><span class="count">@totalSales</span></div>
                                     <div class="stat-heading">Sales</div>
                                 </div>
                             </div>

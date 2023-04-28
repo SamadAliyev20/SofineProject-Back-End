@@ -102,42 +102,51 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach (Order order in Model.Orders)
+										@if (Model.Orders != null)
+										{
+											@foreach (Order order in Model.Orders)
 										{
 											<tr>
 												<th scope="row" data-bs-toggle="collapse" data-bs-target="#demo@(order.Id)" class="accordion-toggle">@order.No</th>
 												<td>@order.CreatedAt?.ToString("dd MMM yyyy")</td>
-												<td class="text-success">@order.OrderItems.Sum(o => (o.Price * o.Count))</td>
+												<td class="text-success">@order.OrderItems?.Sum(o => (o.Price * o.Count))</td>
 												<td>@order.Status</td>
 												<td>@order.Comment</td>
 											</tr>
 											<tr>
 												<td colspan="6" class="hiddenRow">
-													<div class="accordion-collapse collapse" id="demo@(order.Id)">
-														<table class="table">
-															<thead>
-																<tr>
-																	<th scope="col">Name</th>
-																	<th scope="col">Count</th>
-																	<th scope="col">Price</th>
-																	<th scope="col">Total</th>
-																</tr>
-															</thead>
-															<tbody>
-																@foreach (OrderItem orderItem in order.OrderItems)
-																{
-																	<tr>
-																		<td>@orderItem.Product.Title</td>
-																		<td>@orderItem.Count</td>
-																		<td>@orderItem.Price</td>
-																		<td class="text-success">$@(orderItem.Price * orderItem.Count)</td>
-																	</tr>
-																}
-															</tbody>
-														</table>
-													</div>
+														@if (order.OrderItems.Any())
+														{
+															<div class="accordion-collapse collapse" id="demo@(order.Id)">
+																<table class="table">
+																	<thead>
+																		<tr>
+																			<th scope="col">Name</th>
+																			<th scope="col">Count</th>
+																			<th scope="col">Price</th>
+																			<th scope="col">Total</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		@foreach (OrderItem orderItem in order.OrderItems)
+																		{
+																			@if (orderItem != null && orderItem.Product != null)
+																			{
+																				<tr>
+																					<td>@orderItem.Product.Title</td>
+																					<td>@orderItem.Count</td>
+																					<td>@orderItem.Price</td>
+																					<td class="text-success">$@(orderItem.Price * orderItem.Count)</td>
+																				</tr>
+																			}
+																		}
+																	</tbody>
+																</table>
+															</div>
+														}
 												</td>
 											</tr>
+										}
 										}
 									</tbody>
 								</table>

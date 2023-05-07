@@ -52,11 +52,18 @@ $(document).ready(function () {
         let productId = $(this).data('id');
 
         fetch('basket/AddBasket?id=' + productId)
+       
             .then(res => {
                 return res.text();
             }).then(data => {
 
                 $('.mini-cart-inner-content').html(data)
+                fetch('basket/GetBasketCount')
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                        $('.count').text(data);
+                    });
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'bottom-end',
@@ -73,12 +80,7 @@ $(document).ready(function () {
                     icon: 'success',
                     title: 'Product Added to Cart'
                 })
-                fetch('basket/GetBasketCount')
-                    .then(res => {
-                        return res.json();
-                    }).then(data => {
-                        $('.count').text(data);
-                    });
+                
                
             })
     })

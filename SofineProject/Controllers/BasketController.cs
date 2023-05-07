@@ -66,10 +66,13 @@ namespace SofineProject.Controllers
             IEnumerable<Product> products = await _context.Products.Where(p => p.IsDeleted == false).ToListAsync();
             Product product1 = products.FirstOrDefault(p => p.Id == id);
             string basket = HttpContext.Request.Cookies["basket"];
+           
 
-            List<BasketVM> basketVMs = null;
+			List<BasketVM> basketVMs = null;
 
-            if (string.IsNullOrWhiteSpace(basket))
+			
+
+			if (string.IsNullOrWhiteSpace(basket))
             {
                 basketVMs = new List<BasketVM>
                 {
@@ -86,14 +89,17 @@ namespace SofineProject.Controllers
                     if (item.Count < product1.Count)
                     {
                         item.Count += 1;
-                    }
-                }
+						
+					}
+					
+				}
                 else
                 {
                     basketVMs.Add(new BasketVM { Id = (int)id, Count = 1 });
                 }
+                
             }
-            if (User.Identity.IsAuthenticated)
+			if (User.Identity.IsAuthenticated)
             {
                 AppUser appUser = await _userManager.Users
                     .Include(u => u.Baskets.Where(b => b.IsDeleted == false))
@@ -115,22 +121,26 @@ namespace SofineProject.Controllers
                 }
                 await _context.SaveChangesAsync();
             }
-            basket = JsonConvert.SerializeObject(basketVMs);
+			
+            
+				basket = JsonConvert.SerializeObject(basketVMs);
 
-            HttpContext.Response.Cookies.Append("basket", basket);
+				HttpContext.Response.Cookies.Append("basket", basket);
 
-            foreach (BasketVM basketVM in basketVMs)
-            {
-                Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id && p.IsDeleted == false);
+			foreach (BasketVM basketVM in basketVMs)
+				{
+					Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id && p.IsDeleted == false);
 
-                if (product != null)
-                {
-                    basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
-                    basketVM.Title = product.Title;
-                    basketVM.Image = product.MainImage;
-                }
-            }
-            return PartialView("_BasketMiniCartPartial", basketVMs);
+					if (product != null)
+					{
+						basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+						basketVM.Title = product.Title;
+						basketVM.Image = product.MainImage;
+					}
+				}
+			
+			return PartialView("_BasketMiniCartPartial", basketVMs);
+			
         }
         public async Task<IActionResult> DeleteBasket(int? id)
         {
@@ -154,6 +164,18 @@ namespace SofineProject.Controllers
                     basket = JsonConvert.SerializeObject(basketVMs);
                     HttpContext.Response.Cookies.Append("basket", basket);
                 }
+                if (User.Identity.IsAuthenticated)
+                {
+					AppUser appUser = await _userManager.Users
+				   .Include(u => u.Baskets.Where(b => b.IsDeleted == false))
+				   .FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
+					if (appUser.Baskets.Any(b => b.ProductId == id))
+					{
+						appUser.Baskets.FirstOrDefault(b => b.ProductId == id).IsDeleted = true;
+						await _context.SaveChangesAsync();
+
+					}
+				}
                 else
                 {
                     return NotFound();

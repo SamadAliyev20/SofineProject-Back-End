@@ -111,7 +111,7 @@
 												<td>@order.CreatedAt?.ToString("dd MMM yyyy")</td>
 												<td class="text-success">@order.OrderItems?.Sum(o => (o.Price * o.Count))</td>
 												<td>@order.Status</td>
-												<td>@order.Comment</td>
+													<td>@(order.Comment == null ? "Sifarişiniz Gözləmədədir." : order.Comment)</td>
 											</tr>
 											<tr>
 												<td colspan="6" class="hiddenRow">

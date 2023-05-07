@@ -145,7 +145,7 @@ namespace SofineProject.Controllers
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.CreatedBy = $"{appUser.Name} {appUser.SurName}";
             order.OrderItems = orderItems;
-            order.No = appUser.Orders != null && appUser.Orders.Count() > 0 ? appUser.Orders.Last().No + 1 : 1;
+            order.No = appUser.Orders != null && appUser.Orders.Count() > 0 ? appUser.Orders.Last().No + 1 : appUser.Orders.Last().No + 1;
 
             await _appDbContext.Orders.AddAsync(order);
             await _appDbContext.SaveChangesAsync();

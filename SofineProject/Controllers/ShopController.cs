@@ -130,7 +130,6 @@ namespace SofineProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Member")]
-
 		public async Task<IActionResult> AddReview(Review review)
 		{
 			Product product = await _context.Products
@@ -149,17 +148,16 @@ namespace SofineProject.Controllers
 			}
 
 			AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
-
+            
 			if (product.Reviews != null && product.Reviews.Count() > 0 && product.Reviews.Any(r => r.AppUserId == appUser.Id))
 			{
-				ModelState.AddModelError("Name", "You have already submitted a review for this product!");
+                TempData["ToasterMessage5"] = "You have Already Commented!";
 				return View("Detail", productReviewVM);
 			}
 
 			review.CreatedBy = $"{appUser.Name} {appUser.SurName}";
 			review.CreatedAt = DateTime.UtcNow.AddHours(4);
 			review.AppUserId = appUser.Id;
-
 			await _context.Reviews.AddAsync(review);
 			await _context.SaveChangesAsync();
             TempData["Tab"] = "review";

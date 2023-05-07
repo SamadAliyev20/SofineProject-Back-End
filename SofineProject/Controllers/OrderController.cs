@@ -45,8 +45,6 @@ namespace SofineProject.Controllers
 
             if (appUser == null)
             {
-                // Kullanıcı oturum açmamış, bir kullanıcı nesnesi yok, 
-                // veya kullanıcının herhangi bir adresi yoksa, kullanıcıyı başka bir sayfaya yönlendirin.
                 return RedirectToAction("Index", "Home");
             }
 

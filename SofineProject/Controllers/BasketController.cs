@@ -171,7 +171,9 @@ namespace SofineProject.Controllers
 				   .FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
 					if (appUser.Baskets.Any(b => b.ProductId == id))
 					{
-						appUser.Baskets.FirstOrDefault(b => b.ProductId == id).IsDeleted = true;
+                        Basket dbbasket = appUser.Baskets.FirstOrDefault(b => b.ProductId == id);
+                        if (dbbasket == null) { return BadRequest(); }
+                      _context.Baskets.Remove(dbbasket);
 						await _context.SaveChangesAsync();
 
 					}

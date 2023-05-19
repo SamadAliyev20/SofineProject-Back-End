@@ -178,10 +178,6 @@ namespace SofineProject.Controllers
 
 					}
 				}
-                else
-                {
-                    return NotFound();
-                }
             }
             foreach (BasketVM basketVM in basketVMs)
             {

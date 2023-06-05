@@ -5,9 +5,9 @@ namespace SofineProject.ViewModels.AccountViewModels
     public class RegisterVM
     {
         [StringLength(100)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         [StringLength(100)]
-        public string? SurName { get; set; }
+        public string SurName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }

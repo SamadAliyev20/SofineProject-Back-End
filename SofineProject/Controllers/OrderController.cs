@@ -149,7 +149,7 @@ namespace SofineProject.Controllers
 
             await _appDbContext.Orders.AddAsync(order);
             await _appDbContext.SaveChangesAsync();
-            string tempalteFullPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "_CheckoutPartialForEmail.cshtml");
+            string tempalteFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templaes", "_CheckoutPartialForEmail.html");
 
             string templateContent = await System.IO.File.ReadAllTextAsync(tempalteFullPath);
             string adress = $"{appUser.Addresses.FirstOrDefault().State} {appUser.Addresses.FirstOrDefault().City} {appUser.Addresses.FirstOrDefault().Country}";

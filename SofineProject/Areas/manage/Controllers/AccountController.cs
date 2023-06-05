@@ -171,7 +171,7 @@ namespace SofineProject.Areas.manage.Controllers
             string url = Url.Action("ResetPassword", "Account", new { token, email = forgetPasswordAdmin.Email, Areas = "manage" },
                 HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
 
-            string fullpath = Path.Combine(Directory.GetCurrentDirectory(),"Areas","manage", "Views", "Shared", "PassResetAdmin.cshtml");
+            string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templaes", "PassReset.html");
             string templateContent = await System.IO.File.ReadAllTextAsync(fullpath);
             templateContent = templateContent.Replace("{{url}}", url);
 

@@ -72,7 +72,7 @@ namespace SofineProject.Controllers
             string url = Url.Action("EmailConfirm", "Account", new { id = appUser.Id, token = token },
                 HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
 
-            string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "EmailConfirmPartial.cshtml");
+            string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templaes", "EmailConfirmPartial.html");
             string templateContent = await System.IO.File.ReadAllTextAsync(fullpath);
             templateContent = templateContent.Replace("{{url}}", url);
 
@@ -410,7 +410,7 @@ namespace SofineProject.Controllers
 			string url = Url.Action("ResetPassword", "Account", new { token, email = forgotPassword.Email },
 				HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
 
-			string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "PassReset.cshtml");
+			string fullpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templaes", "PassReset.html");
 			string templateContent = await System.IO.File.ReadAllTextAsync(fullpath);
 			templateContent = templateContent.Replace("{{url}}", url);
 

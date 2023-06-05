@@ -129,9 +129,17 @@
 			</div>
 			<ul class="mobile-btns">
 				<li>
-					<a asp-controller="Account" asp-action="Register">
-						Login/Register
-					</a>
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+					{
+					<a asp-controller="Account" asp-action="Profile">My Account</a>
+					<a asp-controller="Order" asp-action="checkout">Checkout</a>
+					<a asp-controller="Account" asp-action="Logout">Sign Out</a>
+					}
+					else
+					{
+					<a asp-controller="Account" asp-action="Login">Sign In</a>
+					<a asp-controller="Account" asp-action="Register">Sign Up</a>
+					}
 				</li>
 				<li>
 					<a asp-controller="Home" asp-action="Index">
